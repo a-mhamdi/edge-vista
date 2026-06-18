@@ -1,2 +1,2 @@
-# embedded_ai
+# Embedded AI
 AI on embedded devices
