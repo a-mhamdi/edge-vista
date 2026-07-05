@@ -15,13 +15,22 @@
 
 #set heading(numbering: numbly("{1}.", default: "1.1"))
 
+#show heading.where(level: 3): it => block(
+  fill: rgb("#fdecea"),
+  radius: 6pt,
+  inset: (x: 10pt, y: 6pt),
+  width: auto,
+)[
+  #text(fill: rgb("#c62828"), weight: "bold", size: 1.1em)[#it.body]
+]
+
 #show: metropolis-theme.with(
   aspect-ratio: "16-9",
   footer: self => "Embedded AI | A. Mhamdi",
   config-info(
-    title: [Embedded AI],
-    subtitle: [A practical approach to embedded AI using ESP32],
-    logo: "typst.svg",
+    title: [IoT and Edge AI],
+    subtitle: [A Practical Approach],
+    // logo: text(weight: "medium", size: 15pt)[Edge AI and IoT],
     author: [Abdelbacet Mhamdi],
     date: datetime.today(),
     institution: [MT \@ ISET Bizerte],
@@ -38,10 +47,12 @@
 = Outline <touying:hidden>
 #outline(title: none, depth: 1)
 
-#include "parts/esp32.typ"
-#include "parts/ai.typ"
-#include "parts/ec.typ"
-#include "parts/use-cases.typ"
+#include "parts/ai-iot.typ"
+// #include "parts/esp32.typ"
+// #include "parts/rpi.typ"
+// #include "parts/edge-impulse.typ"
+// #include "parts/ec.typ"
+#include "parts/anomaly-detection.typ"
 
 #focus-slide[
   Thank you for your attention
