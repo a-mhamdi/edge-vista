@@ -13,6 +13,8 @@
 #let light-blue = rgb("#4A4A75")
 #let light-green = rgb("#44AA44")
 #let light-red = rgb("#EF4444")
+#let teal-color = rgb("#0f766e")
+#let teal-light = rgb("#ccfbf1")
 #let red = rgb("#990F0F")
 #let black = rgb("#111111")
 #let dark-gray = rgb("#2C2C2C")
@@ -24,6 +26,7 @@
 #let warning-color = rgb("#f59e0b")
 #let note-color = rgb("#8b5cf6")
 #let important-color = rgb("#ef4444")
+#let ink = rgb("#1e293b")
 
 #let def(body) = block(
   fill: eg-green,
@@ -61,6 +64,8 @@
   radius: 4pt,
   text(body),
 )
+
+#let topic(body) = text(fill: teal-color, weight: "bold")[#body]
 
 // icon map
 #let _icons = (
@@ -109,6 +114,13 @@
 #let bit-label(bits) = {
   set text(size: 13pt, fill: dark.lighten(30%))
   bits
+}
+
+#let footer(llm) = {
+  place(bottom + right, dx: -1em, dy: -0.5em, text(
+    size: 12pt,
+    fill: teal-color.darken(10%),
+  )[#llm])
 }
 
 #let url-block(url) = block(
