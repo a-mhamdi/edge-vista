@@ -3,30 +3,79 @@
 
 // colour tokens
 #let accent = rgb("#028090")
-#let amber = rgb("#F4A261")
-#let dark = rgb("#1a1a2e")
-#let light = rgb("#f4f4f4")
-#let bg-light = rgb("#EAF4F6")
-#let muted = rgb("#5C6E7A")
-#let eg-green = rgb("#02C39A")
 #let alert = rgb("#F96167")
+#let amber = rgb("#F4A261")
+#let bg-light = rgb("#EAF4F6")
+#let black = rgb("#111111")
+#let boxbg = rgb("#f3f3f3")
+#let dark = rgb("#1a1a2e")
+#let dark-gray = rgb("#2C2C2C")
+#let eg-green = rgb("#02C39A")
+#let graytag = rgb("#e2e2e2")
+#let important-color = rgb("#ef4444")
+#let info-color = rgb("#3b82f6")
+#let ink = rgb("#1e293b")
+#let inkgray = rgb("#2b2b2b")
+#let light = rgb("#f4f4f4")
 #let light-blue = rgb("#4A4A75")
+#let light-gray = rgb("#EBEBEB")
 #let light-green = rgb("#44AA44")
 #let light-red = rgb("#EF4444")
+#let maroon = rgb("#7a1f1f")
+#let mid-gray = rgb("#555555")
+#let muted = rgb("#5C6E7A")
+#let note-color = rgb("#8b5cf6")
+#let off-white = rgb("#F5F5F5")
+#let red = rgb("#990F0F")
 #let teal-color = rgb("#0f766e")
 #let teal-light = rgb("#ccfbf1")
-#let red = rgb("#990F0F")
-#let black = rgb("#111111")
-#let dark-gray = rgb("#2C2C2C")
-#let mid-gray = rgb("#555555")
-#let light-gray = rgb("#EBEBEB")
-#let off-white = rgb("#F5F5F5")
-#let white = rgb("#FFFFFF")
-#let info-color = rgb("#3b82f6")
 #let warning-color = rgb("#f59e0b")
-#let note-color = rgb("#8b5cf6")
-#let important-color = rgb("#ef4444")
-#let ink = rgb("#1e293b")
+#let white = rgb("#FFFFFF")
+
+#let titlebar(txt) = {
+  text(fill: maroon, size: 18pt, weight: "bold", tracking: 1pt)[#txt]
+  v(4pt)
+  line(length: 100%, stroke: 0.4pt + rgb("#dddddd"))
+}
+
+#let notebox(title, body) = box(
+  fill: teal.lighten(88%),
+  stroke: 1pt + teal,
+  radius: 6pt,
+  inset: 10pt,
+  width: 100%,
+)[
+  #text(fill: teal, weight: "bold", size: 15pt)[#title]
+  #v(0.2em)
+  #text(size: 14pt)[#body]
+]
+
+#let quotebox(title: none, body) = {
+  block(
+    fill: boxbg,
+    stroke: (left: 2.5pt + teal-color),
+    width: 100%,
+    inset: 10pt,
+    radius: 2pt,
+  )[
+    #if title != none [
+      #text(fill: maroon, weight: "bold", size: 13pt)[#title]
+      #v(2pt)
+    ]
+    #text(style: "italic")[#body]
+  ]
+}
+
+// bibliography line under a quotebox
+#let bibline(body) = {
+  text(size: 11pt, fill: rgb("#666666"))[#body]
+}
+
+#let sepline() = {
+  v(4pt)
+  line(length: 100%, stroke: 0.3pt + rgb("#dddddd"))
+  v(4pt)
+}
 
 #let def(body) = block(
   fill: eg-green,
@@ -58,6 +107,24 @@
   ]
 }
 
+#let tag(body) = {
+  box(
+    fill: graytag,
+    inset: (x: 6pt, y: 3pt),
+    radius: 3pt,
+    text(style: "italic", size: 12pt, fill: rgb("#555555"))[#body],
+  )
+}
+
+#let bullet(body) = {
+  grid(
+    columns: (14pt, 1fr),
+    column-gutter: 4pt,
+    text(fill: maroon, size: 11pt)[▸], body,
+  )
+  v(10pt)
+}
+
 #let example(body) = block(
   fill: rgb("#fcf04e"),
   inset: (x: 10pt, y: 7pt),
@@ -66,6 +133,19 @@
 )
 
 #let topic(body) = text(fill: teal-color, weight: "bold")[#body]
+
+#let step(tech, question, next) = {
+  grid(
+    columns: (auto, 1fr, auto),
+    column-gutter: 0.35em,
+    align: (left + horizon, left + horizon, left + horizon),
+    text(fill: black)[#tech], text(fill: red, style: "italic")["#question"], text(fill: light-green)[→ #next],
+  )
+}
+
+#let arrow-down = align(center)[
+  #text(fill: inkgray.lighten(20%), size: 15pt)[↓]
+]
 
 // icon map
 #let _icons = (
@@ -123,6 +203,18 @@
   )[#llm])
 }
 
+// top breadcrumb bar
+#let breadcrumb(title, subtitle) = block(
+  fill: rgb("#eeeeee"),
+  width: 100%,
+  inset: (x: 12pt, y: 6pt),
+)[
+  #set text(size: 10pt)
+  #align(right)[
+    #text(fill: maroon)[#title] #h(8pt) #text(fill: rgb("#888888"))[|] #h(8pt) #text(fill: teal-color)[#subitle]
+  ]
+]
+
 #let url-block(url) = block(
   width: 100%,
   inset: 12pt,
@@ -130,22 +222,6 @@
   stroke: (left: 3pt + rgb("#24292f")),
   fill: rgb("#f6f8fa"),
 )[
-  #grid(
-    columns: (auto, 1fr),
-    gutter: 10pt,
-    align: horizon,
-    [
-      #box(
-        inset: 6pt,
-        radius: 50%,
-        fill: rgb("#24292f"),
-        text(fill: white, weight: "bold")[</>],
-      )
-    ],
-    [
-      Source code is available at #h(5pt) #text(fill: rgb("#0969da"))[
-        #link("https://github.com/a-mhamdi/edge-vista/blob/main/" + url)[#url]
-      ]
-    ],
-  )
-]
+  #align(
+    left + horizon,
+  )[Source code is available at #box(image("assets/GitHub.svg", height: 5%)) #text(fill: rgb("#0969da"))[#link("https://github.com/a-mhamdi/edge-vista/blob/main/" + url)[#url]]]]
