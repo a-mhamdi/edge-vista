@@ -26,11 +26,11 @@
 
 #show: metropolis-theme.with(
   aspect-ratio: "16-9",
-  footer: self => "IoT and Edge AI | A. Mhamdi",
+  footer: self => "IoT & Edge AI | A. Mhamdi",
   config-info(
-    title: [Edge Vista],
-    subtitle: [Hardware, Networks, and Intelligence at the Edge],
-    // logo: text(weight: "medium", size: 15pt)[Edge AI and IoT],
+    title: [Edge Vista: An Edge AI Framework for IoT Devices],
+    subtitle: [Hardware, Networks, and Intelligence at the Edge#footnote[Available at #box(image("assets/GitHub.svg", height: 5%)) #link("https://github.com/a-mhamdi/edge-vista")]],
+    // logo: text(weight: "medium", size: 15pt)[],
     author: [Abdelbacet Mhamdi],
     date: datetime.today(),
     institution: [MT \@ ISET Bizerte],
@@ -47,18 +47,15 @@
 = Outline <touying:hidden>
 #outline(title: none, depth: 1)
 
-// #include "parts/ai-iot.typ"
-// #include "parts/rpi.typ"
-#include "parts/esp32.typ"
-// #include "parts/anomaly-detection.typ"
-
-// #include "parts/ec.typ"
+#include "parts/intro.typ"
+#include "parts/rpi.typ"
+#include "parts/iot-ai.typ"
+#include "parts/anomaly-detection.typ"
 
 #focus-slide[
   Thank you for your attention
 ]
 
-// Bibliography
 #set heading(numbering: none, outlined: false)
 = Bibliography
 
