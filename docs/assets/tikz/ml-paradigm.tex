@@ -1,0 +1,66 @@
+%!TEX program = xelatex
+\documentclass{standalone}
+\usepackage{ifpdf}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\begin{document}
+
+\begin{tikzpicture}[
+        node distance=1.25cm,
+        box/.style={rectangle, draw, thick, minimum width=2cm, minimum height=1cm, align=center, rounded corners=3pt},
+        data/.style={box, fill=blue!20},
+        algorithm/.style={box, fill=red!20},
+        output/.style={box, fill=green!20},
+        arrow/.style={-{Stealth[scale=1.2]}, thick},
+        title/.style={font=\bfseries},
+        subtitle/.style={font=\footnotesize\bfseries}
+    ]
+
+% Machine Learning Paradigm
+    \node[title] at (0, 0) (title2) {\underline{Machine Learning Paradigm}};
+    \node[data, below=0.8cm of title2] (data2) {Training Data};
+    \node[algorithm, right=of data2] (algorithm2) {Learned\\Algorithm};
+    \node[output, right=of algorithm2, dashed] (output2) {Expected\\Outputs};
+
+    \draw[arrow] (data2) -- (algorithm2);
+    \draw[arrow, dashed] (output2) -- (algorithm2);
+
+    \node [below=0.3cm of data2, subtitle] {Known};
+    \node [below=0.3cm of output2, subtitle] {Known};
+%% \node [below left=0.2cm of algorithm2, subtitle, rotate=90] {Derived\\ Automatically};
+
+% Add deployment phase for ML
+    \node[algorithm, below=2cm of algorithm2] (model) {Trained\\Model};
+    \node[data, left=of model] (newdata) {New Data};
+    \node[output, right=of model] (newoutput) {Predicted\\Outputs};
+
+    \draw[arrow] (algorithm2) -- (model);
+    \draw[arrow] (newdata) -- (model);
+    \draw[arrow] (model) -- (newoutput);
+
+    \node[subtitle, above=0.3cm of algorithm2] {\sc Training Phase};
+    \node[subtitle, below=0.3cm of model] {\sc Deployment Phase};
+
+    \begin{scope}[on background layer]
+        \node[fit=(title2)(data2)(output2)(algorithm2)(model)(newdata)(newoutput), rectangle, draw=gray!30, rounded corners, inner sep=0.8cm, fill=gray!5] {};
+    \end{scope}
+
+\end{tikzpicture}
+
+\end{document}

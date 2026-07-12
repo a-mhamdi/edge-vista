@@ -1,0 +1,84 @@
+%!TEX program = xelatex
+\documentclass[aspectratio=169, 10pt]{beamer}
+\usepackage{ifpdf}
+\usepackage[active,tightpage]{preview}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur, decorations.pathmorphing}
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green,
+    filecolor=magenta
+}
+
+\begin{document}
+
+\begin{tikzpicture}[
+        node distance=.5cm,
+        every node/.style={
+            rounded corners, 
+            fill=blue!10,
+            inner sep=0.5cm,
+        %text width=3cm,
+            align=center
+        },
+        arrow/.style={
+            -latex
+        },
+        label/.style={
+            font=\small,
+            text=black,
+            inner sep=5pt,
+            outer sep=5pt
+        }
+    ]
+    % Nodes
+    \node[fill=gray!20, draw] at (-2, .5) (start) {Start}; 
+    \node[fill=green!10, draw] at (2, 0) (init) {1. Initialize Model Parameters\\$\mathcal{W} = \left\{w_1, w_2, \cdots, w_n\right\}$};
+
+    \node[right=of init, fill=yellow!10, draw] (forward) {2. Forward Propagation\\$\hat{y} = f(X; \mathcal{W})$};
+
+    \node[below=of forward, fill=orange!10, draw] (loss) {3. Compute Loss\\$\mathcal{L}(\hat{y}, y)$};
+
+    \node[left=of loss, fill=red!10, draw] (backward) {4. Backpropagation\\$\nabla_\mathcal{W} \mathcal{L} = \frac{\partial \mathcal{L}}{\partial \mathcal{W}}$};
+
+    \node[below=of backward, fill=purple!10, xshift=2cm, draw] (update) {5. Parameter Update\\$\mathcal{W}_{t+1} = \mathcal{W}_t - \eta \nabla_\mathcal{W}  \mathcal{L}$};
+
+    % Arrows with curved labels
+    \draw[arrow, out=0, in=170] (start) to (init) ;
+    \draw[arrow] (init) -- (forward) ;
+    %node[midway, sloped, above, label] {Input Data $X$};
+
+    \draw[arrow] (forward) -- (loss) ;
+    %node[midway, sloped, above, label] {Predicted $\hat{y}$};
+
+    \draw[arrow] (loss) -- (backward) ;
+    %node[midway, sloped, above, label] {Loss Value};
+
+    \draw[arrow,out=-90,in=180] (backward) to (update) ;
+    %node[midway, sloped, above, label] {Gradients $\nabla_\theta L$};
+
+    % Cyclic arrow to suggest iteration
+    \draw[arrow, out=0, in=-45] (update.east) to (forward.east) ;
+    \node[rotate=90, sloped, label] at (-.5, -3){\emph{Repeat until Convergence}};
+
+\end{tikzpicture}
+
+\end{document}

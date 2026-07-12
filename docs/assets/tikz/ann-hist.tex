@@ -1,0 +1,104 @@
+%!TEX program = xelatex
+\documentclass[aspectratio=169, 10pt]{beamer}
+\usepackage{ifpdf}
+\usepackage[active,tightpage]{preview}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur, decorations.pathmorphing}
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green,
+    filecolor=magenta
+}
+
+\begin{document}
+
+\begin{tikzpicture}[
+        timeline/.style={
+            thick,
+            -{Latex[length=3mm]},
+        },
+        event/.style={
+            rectangle,
+            rounded corners,
+            draw=black,
+            text width=3.5cm,
+            align=center,
+            font=\footnotesize,
+            inner sep=5pt
+        },
+        year/.style={
+            font=\bfseries\footnotesize,
+            above=3pt
+        }
+    ]
+
+    % --- Timeline axis ---
+    %\draw[timeline] (0,0) -- (10,0);
+
+    % --- Events (evenly spaced along the line) ---
+    \node[event, fill=green!25] (hebb) at (-2,2)
+    {{\bfseries Hebb’s Rule}\\“Cells that fire together wire together.”};
+    \node[year] at (-2,2) [above right=.85cm] {1949};
+
+    \node[event, fill=green!25] (perceptron) at (-1,-5)
+    {{\bfseries Rosenblatt’s Perceptron}\\First trainable neural network.};
+    \node[year] at (-1,-5) [above right=.85cm] {1958};
+
+    \node[event, fill=gray!25] (minsky) at (1.5,-2)
+    {{\bfseries Minsky \& Papert}\\Critique shows limits of Perceptron.};
+    \node[year] at (1.5,-2) [above left=.85cm] {1969};
+
+    \node[event, fill=blue!20] (backprop) at (4,0)
+    {{\bfseries Backpropagation}\\Revives multilayer learning.};
+    \node[year] at (4,0) [above right=.7cm] {1986};
+
+    \node[event, fill=cyan!20] (lenet) at (5.5,-4.5)
+    {{\bfseries LeNet (LeCun)}\\First successful CNN for digits.};
+    \node[year] at (5.5,-4.5) [above right=.85cm] {1998};
+
+    \node[event, fill=orange!25] (transformer) at (7.5,2)
+    {{\bfseries Transformers \& LLMs}\\“Attention is All You Need.”};
+    \node[year] at (7.5,2) [above right=.85cm] {2017–Now};
+
+    \node[event, fill=orange!25] (deep) at (7.75,-2)
+    {{\bfseries Deep Learning Era}\\GPUs \& data fuel breakthroughs.};
+    \node[year] at (7.75,-2) [above right=.85cm] {2006–2012};
+
+    % --- Era labels underneath ---
+    \node[font=\bfseries\scriptsize, text=green!50!black] at (-1,-6.15) {Early Foundations};
+    \node[font=\bfseries\scriptsize, text=gray!70!black] at (1.25,-6.15) {AI Winter};
+    \node[font=\bfseries\scriptsize, text=blue!70!black] at (3.75,-6.15) {Neural Renaissance};
+    \node[font=\bfseries\scriptsize, text=orange!70!black] at (7,-6.15) {Deep Learning Era};
+
+    %\draw[->] (.75,-6.15) to (1.5,-6.15);
+    %\draw[->] (2.45,-6.15) to (4.15,-6.15);
+    %\draw[->] (5.75,-6.15) to (6.2,-6.15);
+
+    \draw [-latex,out=-90,in=90] (hebb) to (perceptron);
+    \draw [-latex,out=0,in=-90] (perceptron) to (minsky);
+    \draw [-latex,out=90,in=-180] (minsky) to (backprop);
+    \draw [-latex,out=-90,in=90] (backprop) to (lenet);
+    \draw [-latex,out=0,in=-90] (lenet) to (deep);
+    \draw [-latex,out=90,in=-90] (deep) to (transformer);
+
+\end{tikzpicture}
+
+\end{document}

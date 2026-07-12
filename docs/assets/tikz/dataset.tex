@@ -1,0 +1,80 @@
+%!TEX program = xelatex
+\documentclass{standalone}
+\usepackage{ifpdf}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\begin{document}
+
+\begin{tikzpicture}[
+        node distance=1cm,
+        annotation/.style={draw=#1!80!black, fill=#1!10, text=#1!90!black, 
+        font=\scriptsize, rounded corners, blur shadow},
+        tablecell/.style={fill=#1!5, draw=#1!20, ultra thin},
+        header/.style={fill=#1!20, draw=#1!40, text=#1!90!black}
+    ]
+
+    % Color definitions
+    \colorlet{featurecolor}{blue!60!cyan}
+    \colorlet{targetcolor}{red!70!pink}
+    \colorlet{samplecolor}{green!40!gray}
+
+    % Draw table structure with colored cells
+    \foreach \x in {0,1,2,3,4} {
+        \foreach \y in {0,1,2,3,4} {
+            \pgfmathsetmacro{\cellcolor}{\x==4 ? "targetcolor" : "featurecolor"}
+            \draw[tablecell=\cellcolor] (\x,-\y) rectangle (\x+1,-\y-1);
+        }
+    }
+
+    \begin{scope}[transparency group, opacity=0.8]
+        \shade[left color=featurecolor!30, right color=featurecolor!5] (0,0) rectangle (4,-1);
+        \shade[left color=targetcolor!30, right color=targetcolor!5] (4,0) rectangle (5,-1);
+    \end{scope}
+
+    \node[header=featurecolor, rotate=90] at (0.5,0.8) {\text{Feature 1}};
+    \node[header=featurecolor, rotate=90] at (1.5,0.8) {\text{Feature 2}};
+    \node[header=featurecolor, rotate=90] at (2.5,0.8) {\text{Feature 3}};
+    \node[header=featurecolor, rotate=90] at (3.5,0.8) {\text{Feature 4}};
+    \node[header=targetcolor, rotate=0] at (4.5,0.8) {\text{Target}};
+
+    \foreach \y [count=\yi from 0] in {1,2,3} {
+        \node[left, fill=samplecolor!10, draw=samplecolor!30, rounded corners=2pt, 
+        inner sep=2pt, font=\small\itshape] at (-0.25,-\yi-.675) {Sample \y};
+    }
+
+    \node[font=\small] at (0.5,-0.5) {5.1};
+    \node[font=\small] at (1.5,-0.5) {3.5};
+    \node[font=\small] at (2.5,-0.5) {1.4};
+    \node[font=\small] at (3.5,-0.5) {-0.78};
+    \node[font=\small, text=targetcolor!90!black] at (4.5,-0.5) {0};
+
+    \node[annotation=featurecolor, above=of {(2,0)}, yshift=10mm] (features) {Features (Input Variables)};
+    \draw[-{Stealth[scale=1.2, color=featurecolor!80]}, thick] (features.south) -- (2,0);
+
+    \node at (-4.65,0) {};
+
+    \node[annotation=samplecolor, left=of {(0,-1)}, xshift=-8mm] (samples) {Samples (Observations)};
+    \draw[-{Stealth[scale=1.2, color=samplecolor!80]}, thick] (samples.east) -- (0,-1);
+
+    \node[annotation=targetcolor, right=of {(4,-0.5)}, xshift=8mm] (target) {Target (Output)};
+    \draw[-{Stealth[scale=1.2, color=targetcolor!80]}, thick] (target.west) -- (4.5,-0.5);
+
+\end{tikzpicture}%
+
+\end{document}

@@ -1,0 +1,116 @@
+%!TEX program = xelatex
+\documentclass[aspectratio=169, 10pt]{beamer}
+\usepackage{ifpdf}
+\usepackage[active,tightpage]{preview}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur, decorations.pathmorphing}
+\usetikzlibrary{shadows, fadings, decorations.text}
+
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green,
+    filecolor=magenta
+}
+
+\begin{document}
+
+\definecolor{maroonc}{HTML}{7a1f1f}
+\definecolor{maroonlight}{HTML}{b95d5d}
+\definecolor{tealc}{HTML}{0f766e}
+\definecolor{teallight}{HTML}{5eb3ab}
+\definecolor{tealpale}{HTML}{d7f0ec}
+\definecolor{inkgray}{HTML}{2b2b2b}
+
+\begin{tikzpicture}[
+        font=\sffamily,
+        >={Stealth[length=2.6mm,width=2mm]},
+        branch/.style={
+            rounded corners=3pt,
+            draw=inkgray!40,
+            fill=white,
+            drop shadow={shadow xshift=0.6pt, shadow yshift=-0.8pt, opacity=0.35},
+            align=center,
+            font=\sffamily\small,
+            inner sep=5pt,
+            text width=2.6cm
+        },
+        leader/.style={
+            -{Stealth[length=2.2mm]},
+            thick,
+            draw=inkgray!55
+        }
+    ]
+
+    \def\rAI{5.4}
+    \def\rML{3.9}
+    \def\rDL{2.3}
+
+    \coordinate (cAI) at (0,0);
+    \coordinate (cML) at (-0.55,-0.75);
+    \coordinate (cDL) at (-1.0,-1.35);
+
+    \begin{scope}
+        \fill[tealpale] (cAI) circle (\rAI);
+        \fill[teallight, opacity=0.55] (cML) circle (\rML);
+        \fill[tealc, opacity=0.55] (cDL) circle (\rDL);
+
+        \draw[tealc, thick] (cAI) circle (\rAI);
+        \draw[tealc!80!black, thick] (cML) circle (\rML);
+        \draw[maroonc, thick] (cDL) circle (\rDL);
+    \end{scope}
+
+    \node[font=\sffamily\bfseries\Large, text=tealc!70!black]
+    at ($(cAI)+(0,\rAI-0.7)$) {Artificial Intelligence};
+    \node[font=\sffamily\bfseries\large, text=tealc!90!black]
+    at ($(cML)+(0,\rML-0.65)$) {Machine Learning};
+    \node[font=\sffamily\bfseries, text=white] at (cDL) {Deep\newline Learning};
+
+    \begin{scope}
+        \draw[maroonc, thick, dash pattern=on 5pt off 3pt, rotate around={25:($(cDL)+(1.6,0.9)$)}]
+        ($(cDL)+(1.6,0.9)$) ellipse (2.0 and 1.05);
+    \end{scope}
+    \node[font=\sffamily\bfseries\small, text=maroonc, align=center]
+    at ($(cDL)+(1.5,1.55)$) {Generative\\ AI};
+
+    \node[branch] (nlp) at (-6.7, 2.2) {Natural Language\\ Processing};
+    \node[branch] (cv)  at (-6.9,-1.4) {Computer\\ Vision};
+    \node[branch] (rob) at (-5.2,-4.3) {Robotics};
+    \node[branch] (exp) at ( -4.5, 5.25) {Expert\\ Systems};
+    \node[branch] (rl)  at ( 5.6, 2.6) {Reinforcement\\ Learning};
+    \node[branch] (gan) at ( 5.6,-2.2) {Speech \&\\ Audio AI};
+
+    \draw[leader] (nlp.east) to[out=0,in=160] ($(cML)+(-2.4,1.9)$);
+    \draw[leader] (cv.east)  to[out=10,in=200] ($(cML)+(-2.2,-0.6)$);
+
+    \draw[leader] (rob.north) to[out=90,in=250] ($(cAI)+(-3.6,-3.3)$);
+    \draw[leader] (exp.south) to[out=270,in=170] ($(cAI)+(-2.3,3.7)$);
+
+    \draw[leader] (rl.west)  to[out=180,in=20]  ($(cML)+(2.6,1.4)$);
+    \draw[leader] (gan.west) to[out=180,in=-20] ($(cDL)+(1.9,-0.6)$);
+
+    \node[font=\sffamily\itshape\footnotesize, text=inkgray, align=left]
+    at (0,-6.4)
+    {Nested rings show strict containment (AI $\supset$ ML $\supset$ DL);\\
+    satellite boxes show related subfields, positioned by which ring they mainly draw on.};
+
+\end{tikzpicture}
+
+\end{document}

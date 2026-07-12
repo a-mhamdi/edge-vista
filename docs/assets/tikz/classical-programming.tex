@@ -1,0 +1,54 @@
+%!TEX program = xelatex
+\documentclass{standalone}
+\usepackage{ifpdf}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\begin{document}
+
+\begin{tikzpicture}[
+        node distance=1.25cm,
+        box/.style={rectangle, draw, thick, minimum width=2cm, minimum height=1cm, align=center, rounded corners=3pt},
+        data/.style={box, fill=blue!20},
+        algorithm/.style={box, fill=red!20},
+        output/.style={box, fill=green!20},
+        arrow/.style={-{Stealth[scale=1.2]}, thick},
+        title/.style={font=\bfseries},
+        subtitle/.style={font=\footnotesize\bfseries}
+    ]
+
+    % Classical Programming Paradigm
+    \node[title] (title1) {\underline{Classical Programming Paradigm}};
+    \node[data, below=0.8cm of title1] (data1) {Data};
+    \node[algorithm, right=of data1] (algorithm1) {Algorithm\\(Rules)};
+    \node[output, right=of algorithm1] (output1) {Output\\(Results)};
+
+    \draw[arrow] (data1) -- (algorithm1);
+    \draw[arrow] (algorithm1) -- (output1);
+
+    \node [below=0.3cm of data1, subtitle] {Known};
+    \node [below=0.3cm of algorithm1, subtitle] {\sc Designed by programmer};
+    \node [below=0.3cm of output1, subtitle] {Desired};
+
+    \begin{scope}[on background layer]
+        \node[fit=(title1)(data1)(algorithm1)(output1), rectangle, draw=gray!30, rounded corners, inner sep=0.8cm, fill=gray!5] {};
+    \end{scope}
+
+\end{tikzpicture}
+
+\end{document}

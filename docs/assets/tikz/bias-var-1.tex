@@ -1,0 +1,104 @@
+%!TEX program = xelatex
+\documentclass[10pt]{standalone}
+\usepackage{ifpdf}
+\usepackage[active,tightpage]{preview}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur, decorations.pathmorphing}
+\usetikzlibrary{shadows, fadings, decorations.text}
+
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\usepackage{pifont}
+
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green,
+    filecolor=magenta
+}
+
+\tikzset{
+    every node/.style={font=\footnotesize}
+}
+
+\begin{document}
+
+\begin{tikzpicture}[yscale=.7]
+
+    \begin{scope}
+        \node [fill=yellow!50,draw,thick, minimum height=1cm, minimum width=2cm,
+        decorate, decoration={random steps,segment length=3pt,amplitude=1pt}]
+        at (0,8.5) {Low Bias};
+        \node at (0,0) {\includegraphics[width=2.75cm]{arch-target.png}};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.2,0.2) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.4,-0.1) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.2,0.5) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0.2,0.1) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0.2,-0.1) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.5,0.2) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0.1,0.4) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.1,-0.3) {};
+    \end{scope}
+
+    \begin{scope}[xshift=5cm]
+        \node [fill=yellow!50,draw,thick, minimum height=1cm, minimum width=2cm,
+        decorate, decoration={random steps,segment length=3pt,amplitude=1pt}]
+        at (0,8.5) {High Bias};
+        \node at (0,0) {\includegraphics[width=2.75cm]{arch-target.png}};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0.5,-1.3) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.8,-0.8) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0,-1.4) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.6,-1.4) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-1,-1.1) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0,-0.8) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0.7,-0.7) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (1,-1.2) {};
+    \end{scope}
+
+    \begin{scope}[yshift=5cm]
+        \node [rotate=90,fill=yellow!50,draw,thick, minimum height=1cm, minimum width=2cm,
+        decorate, decoration={random steps,segment length=3pt,amplitude=1pt}]
+        at (-2.5,0) {Low Variance};
+        \node at (0,0) {\includegraphics[width=2.75cm]{arch-target.png}};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0,0.3) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.2,0) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.1,0.1) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0.1,0.1) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.1,0.2) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.2,0.1) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0,0) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (0,0) {};
+    \end{scope}
+
+    \begin{scope}[xshift=5cm,yshift=5cm]
+        \node [rotate=90,fill=yellow!50,draw,thick, minimum height=1cm, minimum width=2cm,
+        decorate, decoration={random steps,segment length=3pt,amplitude=1pt}]
+        at (-7.5,-5) {High Variance};
+        \node at (0,0) {\includegraphics[width=2.75cm]{arch-target.png}};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.4,1.4) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.8,1.4) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.6,1.4) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.7,1.2) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.7,1.4) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.5,1.2) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.6,1.6) {};
+        \node[circle,inner sep=0pt,minimum size=5pt,fill=blue] at (-0.8,1.6) {};
+    \end{scope}
+
+\end{tikzpicture}
+\end{document}

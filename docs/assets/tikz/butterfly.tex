@@ -29,37 +29,37 @@
 
 \begin{document}
 \begin{tikzpicture}[
-  >=Stealth,
-  node distance = 0pt,
+        >=Stealth,
+        node distance = 0pt,
   % signal node style
-  sig/.style = {
-    circle, draw=nodecolor, fill=white,
-    line width=0.8pt, minimum size=7pt, inner sep=0pt
-  },
+        sig/.style = {
+            circle, draw=nodecolor, fill=white,
+            line width=0.8pt, minimum size=7pt, inner sep=0pt
+        },
   % twiddle factor label style
-  tw/.style  = {font=\tiny, midway, fill=white, inner sep=2pt},
+        tw/.style  = {font=\tiny, midway, fill=white, inner sep=2pt},
   % stage label style
-  stg/.style = {font=\bfseries\tiny, text=nodecolor},
-]
+        stg/.style = {font=\bfseries\tiny, text=nodecolor},
+    ]
 
-  \node[font=\tiny, fill=yellow, rounded corners] at (0.7, 0.6) {Single butterfly};
-  \node[sig] (ba) at (0, 0)    {};
-  \node[sig] (bb) at (0, -1.1) {};
-  \node[sig] (bc) at (1.4, 0)    {};
-  \node[sig] (bd) at (1.4, -1.1) {};
-  \draw[->, arrowfwd] (ba) -- (bc);
-  \draw[->, arrowfwd] (bb) -- (bd);
-  \draw[->, arrowbwd] (ba) -- (bd);
-  \draw[->, arrowbwd] (bb) -- node[tw, font=\footnotesize] {$W_N^k$} (bc);
-  \node[left,  font=\tiny] at (ba.west) {$a$};
-  \node[left,  font=\tiny] at (bb.west) {$b$};
-  \node[right, font=\tiny] at (bc.east) {$a + W_N^k b$};
-  \node[right, font=\tiny] at (bd.east) {$a - W_N^k b$};
+    \node[font=\tiny, fill=yellow, rounded corners] at (0.7, 0.6) {Single butterfly};
+    \node[sig] (ba) at (0, 0)    {};
+    \node[sig] (bb) at (0, -1.1) {};
+    \node[sig] (bc) at (1.4, 0)    {};
+    \node[sig] (bd) at (1.4, -1.1) {};
+    \draw[->, arrowfwd] (ba) -- (bc);
+    \draw[->, arrowfwd] (bb) -- (bd);
+    \draw[->, arrowbwd] (ba) -- (bd);
+    \draw[->, arrowbwd] (bb) -- node[tw, font=\footnotesize] {$W_N^k$} (bc);
+    \node[left,  font=\tiny] at (ba.west) {$a$};
+    \node[left,  font=\tiny] at (bb.west) {$b$};
+    \node[right, font=\tiny] at (bc.east) {$a + W_N^k b$};
+    \node[right, font=\tiny] at (bd.east) {$a - W_N^k b$};
 
-\begin{scope}[yshift=-1.8cm]
-	\draw[->, arrowfwd, line width=0.8pt] (0,0) -- (0.7,0) node[right, font=\tiny] {pass-through};
-	\draw[->, arrowbwd, line width=0.8pt] (0, -0.6) -- (0.7, -0.6) node[right, font=\tiny] {$\times W_N^k$ (twiddle)};
-\end{scope}
+    \begin{scope}[yshift=-1.8cm]
+        \draw[->, arrowfwd, line width=0.8pt] (0,0) -- (0.7,0) node[right, font=\tiny] {pass-through};
+        \draw[->, arrowbwd, line width=0.8pt] (0, -0.6) -- (0.7, -0.6) node[right, font=\tiny] {$\times W_N^k$ (twiddle)};
+    \end{scope}
 
 \end{tikzpicture}
 \end{document}

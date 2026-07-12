@@ -1,0 +1,125 @@
+%!TEX program = xelatex
+\documentclass[10pt]{standalone}
+\usepackage{ifpdf}
+\usepackage[active,tightpage]{preview}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, backgrounds, fit, positioning, shapes.geometric, calc, decorations.pathreplacing, decorations.markings,shadows.blur, decorations.pathmorphing}
+\usetikzlibrary{shadows, fadings, decorations.text}
+
+\PreviewEnvironment{tikzpicture}
+
+\usepackage{xltxtra}
+\usepackage{xunicode}
+
+% Fonts
+\usepackage{fontspec}
+\defaultfontfeatures{Mapping=tex-text}
+
+\usepackage{newtxsf}
+\setmainfont{Fira Sans}
+\usepackage{mathastext}
+
+\usepackage{pifont}
+
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=green,
+    filecolor=magenta
+}
+
+\tikzset{
+    every node/.style={font=\footnotesize}
+}
+
+\begin{document}
+
+\centering
+\begin{tikzpicture}[
+        scale=0.9,
+        box/.style={draw, minimum width=4cm, minimum height=4cm, align=center, font=\small, fill=white, drop shadow}
+    ]
+
+        % Create a 2x2 grid
+    \draw[step=4cm, gray!30, very thin] (0,0) grid (8,8);
+
+        % X and Y axes labels
+    \node[rotate=90, anchor=center] at (-1, 4) {\textbf{Variance}};
+    \node[anchor=center] at (4, 8.75) {\textbf{Bias}};
+
+        % Arrows for axes
+    \draw[->] (-0.75, 8.5) -- (-0.75, .5) node[below] {\small High};
+    \draw[->] (-.75, 8.5) -- (8.5, 8.5) node[right] {\small High};
+    \node[above] at (-0.75, 8.5) {\small Low};
+    \node[left] at (-.75, 8.5) {\small Low};
+
+        % Low Bias, Low Variance (good fit)
+    \node[box, fill=green!20] at (2, 6) {
+        \textbf{\large Good Fit} \\[0.3cm]
+        \begin{tikzpicture}[scale=0.5]
+                % Data points
+            \foreach \x/\y in {0.5/0.8, 1.2/1.1, 2.0/2.3, 3.0/2.8, 3.8/4.1, 4.5/4.8}
+            \fill[blue] (\x,\y) circle (0.15);
+                % Model line
+            \draw[thick, red] (0.3,0.4) to[out=50,in=200] (4.7,5.0);
+        \end{tikzpicture} %\\[0.3cm]
+    };
+
+        % High Bias, Low Variance (underfitting)
+    \node[box, fill=yellow!10] at (6, 6) {
+        \textbf{\large Underfitting} \\[0.3cm]
+        \begin{tikzpicture}[scale=0.5]
+                % Data points
+            \foreach \x/\y in {0.5/0.8, 1.2/1.1, 2.0/2.3, 3.0/2.8, 3.8/4.1, 4.5/4.8}
+            \fill[blue] (\x,\y) circle (0.15);
+                % Model line
+            \draw[thick, red] (0.3,1.5) -- (4.7,3.7);
+        \end{tikzpicture} %\\[0.3cm]
+
+    };
+
+        % Low Bias, High Variance (overfitting)
+    \node[box, fill=yellow!10] at (2, 2) {
+        \textbf{\large Overfitting} \\[0.3cm]
+        \begin{tikzpicture}[scale=0.5]
+                % Data points
+            \foreach \x/\y in {0.5/0.8, 1.2/1.1, 2.0/2.3, 3.0/2.8, 3.8/4.1, 4.5/4.8}
+            \fill[blue] (\x,\y) circle (0.15);
+                % Model line - squiggly overfitting
+            \draw[thick, red] (0.3,0.5) to[out=20,in=270] (0.8,1.2) 
+            to[out=90,in=270] (1.5,1.0)
+            to[out=90,in=220] (2.5,2.5)
+            to[out=40,in=260] (3.3,2.6)
+            to[out=80,in=190] (4.0,4.2)
+            to[out=10,in=180] (4.7,4.7);
+        \end{tikzpicture} %\\[0.3cm]
+
+    };
+
+        % High Bias, High Variance (worst case)
+    \node[box, fill=red!20] at (6, 2) {
+        \textbf{\large Worst Case} \\[0.3cm]
+        \begin{tikzpicture}[scale=0.5]
+                % Data points
+            \foreach \x/\y in {0.5/0.8, 1.2/1.1, 2.0/2.3, 3.0/2.8, 3.8/4.1, 4.5/4.8}
+            \fill[blue] (\x,\y) circle (0.15);
+                % Model line - incorrect pattern that's also noisy
+            \draw[thick, red] plot[smooth, tension=0.7] coordinates {
+                (0.3,3.5) (1.0,3.2) (1.8,3.7) (2.5,3.4) (3.2,3.8) (4.0,3.3) (4.7,3.6)
+            };
+        \end{tikzpicture} %\\[0.3cm]
+
+    };
+
+    \node at (0,4.5) {\ding{172}};
+    \node at (4,4.5) {\ding{173}};
+    \node at (0,0) {\ding{174}};
+    \node at (4,0) {\ding{175}};
+
+\end{tikzpicture}
+
+\end{document}
