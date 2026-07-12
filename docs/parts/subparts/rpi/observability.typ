@@ -162,7 +162,7 @@
 - Dashboards, alerts, panels#footnote[No coding required to build a view]
 - Talks to Prometheus over HTTP using PromQL under the hood
 
-#align(center)[#image("../../../assets/grafana.png", width: 95%)]
+#align(center)[#image("../../../assets/grafana.png", width: 90%)]
 
 
 #topic[Getting Dashboards Fast]
