@@ -219,3 +219,11 @@ codes/mosquitto/passwd
 docs/assets/tikz/tmp.pdf
 docs/assets/tikz/tmp.tex
 docs/assets/tmp.svg
+codes/esp32-playground/include/config.hpp
+codes/esp32-playground/.idea
+codes/esp32-cam/tools/ei_dataset/unlabeled
+codes/influxdb/data
+codes/influxdb/config
+codes/nodered/data/.npm/_cacache
+codes/nodered/data/node_modules
+codes/MQTT-Explorer-0.4.0-beta.6.AppImage

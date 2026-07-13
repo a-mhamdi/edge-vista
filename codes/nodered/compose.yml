@@ -1,4 +1,5 @@
 services:
+
   nodered:
     image: nodered/node-red
     container_name: nodered
