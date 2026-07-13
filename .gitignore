@@ -224,6 +224,11 @@ codes/esp32-playground/.idea
 codes/esp32-cam/tools/ei_dataset/unlabeled
 codes/influxdb/data
 codes/influxdb/config
-codes/nodered/data/.npm/_cacache
+codes/nodered/data/.npm/
+codes/nodered/data/node_modules/
+codes/nodered/data/lib/
+codes/nodered/data/*.backup
+codes/nodered/data/.config.*.json
+codes/nodered/data/flows_cred.json
 codes/nodered/data/node_modules
 codes/MQTT-Explorer-0.4.0-beta.6.AppImage
