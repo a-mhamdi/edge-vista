@@ -41,3 +41,7 @@ Its default operating system is *Raspberry Pi OS* (known as Raspbian prior to Ma
 == Node-Red
 #title-slide("Node-Red", "Installation, Configuration, Running and Security")
 #include "subparts/rpi/nodered.typ"
+
+== InfluxDB
+#title-slide("InfluxDB", "Installation, Configuration, and Monitoring")
+#include "subparts/rpi/influxdb.typ"
