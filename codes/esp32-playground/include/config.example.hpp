@@ -1,27 +1,22 @@
 #pragma once
 
+#include <cstdint>
+
 namespace config
 {
+    constexpr char WIFI_SSID[]     = "<SSID>";
+    constexpr char WIFI_PASSWORD[] = "<PASSWORD>";
 
-    // Wi-Fi credentials
-    constexpr char WIFI_SSID[] = "THE_WIFI_SSID";
-    constexpr char WIFI_PASSWORD[] = "THE_WIFI_PASSWORD";
+    const int SERVER_PORT = 80;
+    const int WS_PORT     = 81;
 
+    constexpr const char* MQTT_BROKER    = "<BROKER_IP>";
+    constexpr uint16_t    MQTT_PORT      = 1883;
+    constexpr const char* MQTT_USER      = "user";
+    constexpr const char* MQTT_PASSWORD  = "password";
+    constexpr const char* MQTT_CLIENT_ID = "esp32-playground";
+    constexpr const char* TOPIC_LED_SET  = "edge-vista/led/set";
+    constexpr const char* TOPIC_POT      = "edge-vista/pot";
 
-    // MQTT configuration
-    constexpr char MQTT_BROKER[] = "192.168.1.100";
-    constexpr uint16_t MQTT_PORT = 1883;
-
-    constexpr char MQTT_CLIENT_ID[] = "esp32-playground";
-
-
-    // MQTT topics
-    constexpr char MQTT_TOPIC_LED[] = "edge-vista/led";
-    constexpr char MQTT_TOPIC_POT[] = "edge-vista/potentiometer";
-
-
-    // LoRa configuration
-    constexpr long LORA_FREQUENCY = 868E6;   // Europe/Tunisia
-    constexpr uint8_t LORA_SYNC_WORD = 0xF3;
-
+    constexpr char DEVICE_NAME[] = "esp32-playground";
 }
