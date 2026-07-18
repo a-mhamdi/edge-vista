@@ -1,0 +1,17 @@
+[Unit]
+Description=Pi-Cam YOLO11 Edge AI Inference
+After=network-online.target
+Wants=network-online.target
+
+
+[Service]
+Type=simple
+User={{ ansible_user }}
+WorkingDirectory={{ pi_cam_remote_path }}
+ExecStart=/home/{{ ansible_user }}/.local/bin/uv run main.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+

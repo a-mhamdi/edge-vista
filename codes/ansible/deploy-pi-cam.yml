@@ -1,0 +1,102 @@
+---
+- name: Deploy pi-cam YOLO inference package to Raspberry Pi 5 fleet
+  hosts: pis
+  become: true
+  vars:
+    pi_cam_local_path: "../pi-cam"
+    pi_cam_remote_path: "/home/pi/pi-cam"
+    yolo_model: "yolo11n"
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600
+
+    - name: Install base system dependencies
+      ansible.builtin.apt:
+        name:
+          - vim
+          - git
+          - curl
+          - build-essential
+          - libopenblas-dev
+          - python3-dev
+          - python3-venv
+          - libjpeg-dev
+          - v4l-utils
+          - libgl1
+        state: present
+
+    - name: Check if uv is already installed
+      ansible.builtin.stat:
+        path: "/home/{{ ansible_user }}/.local/bin/uv"
+      register: uv_check
+      become: false
+
+    - name: Install uv
+      ansible.builtin.shell: curl -LsSf https://astral.sh/uv/install.sh | sh
+      become: false
+      when: not uv_check.stat.exists
+
+    - name: Ensure remote project directory exists
+      ansible.builtin.file:
+        path: "{{ pi_cam_remote_path }}"
+        state: directory
+        owner: "{{ ansible_user }}"
+        mode: "0755"
+
+    - name: Copy pi-cam project to the Pi
+      ansible.posix.synchronize:
+        src: "{{ pi_cam_local_path }}/"
+        dest: "{{ pi_cam_remote_path }}/"
+        rsync_opts:
+          - "--exclude=.venv"
+          - "--exclude=models"
+          - "--exclude=__pycache__"
+          - "--exclude=.git"
+      become: false
+
+    - name: Run uv sync to install dependencies
+      ansible.builtin.shell: |
+        /home/{{ ansible_user }}/.local/bin/uv sync
+      args:
+        chdir: "{{ pi_cam_remote_path }}"
+        executable: /bin/bash
+      become: false
+
+    - name: Ensure models directory exists
+      ansible.builtin.file:
+        path: "{{ pi_cam_remote_path }}/models"
+        state: directory
+        owner: "{{ ansible_user }}"
+        mode: "0755"
+      become: false
+
+    - name: Download YOLO and export to ONNX
+      ansible.builtin.shell: |
+        source /home/{{ ansible_user }}/.local/bin/env
+        uv run --project {{ pi_cam_remote_path }} yolo export model={{ yolo_model }} format=onnx dynamic=True simplify=True device=cpu
+      args:
+        chdir: "{{ pi_cam_remote_path }}/models"
+        executable: /bin/bash
+        creates: "{{ pi_cam_remote_path }}/models/{{ yolo_model }}.onnx"
+      become: false
+
+    - name: Install systemd service for pi-cam
+      ansible.builtin.template:
+        src: pi-cam.service.j2
+        dest: /etc/systemd/system/pi-cam.service
+        mode: "0644"
+      notify: Reload systemd
+
+    - name: Enable and start pi-cam service
+      ansible.builtin.systemd:
+        name: pi-cam
+        enabled: true
+        state: restarted
+        daemon_reload: true
+
+  handlers:
+    - name: Reload systemd
+      ansible.builtin.systemd:
+        daemon_reload: true
