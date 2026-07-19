@@ -100,7 +100,7 @@ Network of physical devices — sensors, actuators, microcontrollers — that co
 
 #important[WebSocket is unnecessary here: no continuous data, no need for the server to push updates unprompted.]
 
-#url-block("codes/led-rest/")
+#url-block("codes/esp32-iot/")
 
 ---
 
@@ -118,8 +118,7 @@ then add `~/.platformio/penv/bin` to `PATH`.
 
 #info("One config file, reproducible builds — no more manual Library Manager clicks.")
 
-- #text(weight: "bold", fill: light-red)[Project layout:] `platformio.ini` at the root, source in `src/main.cpp`, \
-dependencies declared under `lib_deps`.
+- #text(weight: "bold", fill: light-red)[Project layout:] `platformio.ini` at the root, source in `src/main.cpp`, dependencies declared under `lib/`.
 - #text(weight: "bold", fill: light-red)[Core commands:]
 / Build: `pio run`
 / Flash: `pio run --target upload`
@@ -134,7 +133,7 @@ dependencies declared under `lib_deps`.
   / WebSocket: solves it: one persistent connection, the ESP32 *pushes* new readings as they change — no repeated handshakes.
   #v(1em)
   #align(center)[#text(fill: gray, size: 18pt)[Same server, one new `/ws` endpoint added.]]
-  #url-block("codes/pot-ws/")
+  #url-block("codes/esp32-iot/")
 ]
 
 
@@ -177,15 +176,12 @@ dependencies declared under `lib_deps`.
       #v(0.3em)
       - HTTP: pull-based, request → response
       - MQTT: push-based, event-driven
-      - No polling — devices publish only when there's
-      something to say
+      - No polling — devices publish only when there's something to say
     ],
   )
 
   #notebox[][
-    MQTT decouples *who sends* from *who receives* — a device
-    publishes without knowing or caring who (if anyone) is
-    listening.
+    MQTT decouples *who sends* from *who receives* — a device publishes without knowing or caring who (if anyone) is listening.
   ]
 ]
 
@@ -203,7 +199,7 @@ dependencies declared under `lib_deps`.
         radius: 6pt,
         inset: 8pt,
       )[
-        #text(fill: teal, weight: "bold", size: 14pt)[Publisher\ (e.g. ESP32)]
+        #text(fill: teal, weight: "bold", size: 14pt)[Publisher\ _(e.g. ESP32)_]
       ],
       text(fill: inkgray, size: 20pt)[→],
       box(
@@ -221,7 +217,7 @@ dependencies declared under `lib_deps`.
         radius: 6pt,
         inset: 8pt,
       )[
-        #text(fill: teal, weight: "bold", size: 14pt)[Subscriber(s)\ (e.g. Node-RED)]
+        #text(fill: teal, weight: "bold", size: 14pt)[Subscriber(s)\ _(e.g. Node-RED)_]
       ],
     )
   ]
@@ -298,7 +294,7 @@ dependencies declared under `lib_deps`.
   ]
   */
 
-  #url-block("codes/mqtt/")
+  #url-block("codes/esp32-iot/")
 ]
 
 ---
@@ -313,7 +309,7 @@ dependencies declared under `lib_deps`.
 - LoRa is the *physical layer only* — modulation and radio, nothing else.
 
 #important[
-  LoRa ≠ LoRaWAN. LoRa is the radio modulation (PHY). *LoRaWAN* is the open MAC/network protocol built on top of it, standardized by the LoRa Alliance. You can use raw LoRa point-to-point without ever touching LoRaWAN — that's exactly what the demo later in this section does.
+  LoRa ≠ LoRaWAN. LoRa is the radio modulation (PHY). *LoRaWAN* is the open MAC/network protocol built on top of it, standardized by the LoRa Alliance. We can use raw LoRa point-to-point without ever touching LoRaWAN.
 ]
 
 #slide[
@@ -337,7 +333,7 @@ dependencies declared under `lib_deps`.
     )
   ]
   #note[
-    LoRa doesn't replace MQTT or WebSocket from earlier in this section — it replaces Wi-Fi/Ethernet as *how a device reaches the network in the first place*. MQTT still runs on top, just past the gateway.
+    LoRa doesn't replace MQTT or WebSocket from earlier in this manual — it replaces Wi-Fi/Ethernet as *how a device reaches the network in the first place*. MQTT still runs on top, just past the gateway.
   ]
 ]
 
@@ -404,7 +400,7 @@ dependencies declared under `lib_deps`.
   - Wi-SUN
 
   *LoRaWAN network servers*
-  - The Things Network (TTN) — free community network, easiest workshop starting point
+  - The Things Network (TTN) — free community network
   - ChirpStack — open-source, self-hosted, pairs naturally with the Pi already running Mosquitto/Node-RED
   - Commercial: AWS IoT Core for LoRaWAN, Helium
 ]
@@ -414,7 +410,7 @@ dependencies declared under `lib_deps`.
   - *Spreading Factor* (SF7–SF12) — higher SF means longer range and better sensitivity, but lower data rate and longer airtime. The main trade-off dial.
   - *Bandwidth* — 125 / 250 / 500 kHz; wider means faster but shorter range.
   - *Coding Rate* — forward error correction overhead (4/5 to 4/8).
-  - Airtime roughly doubles with every step up in Spreading Factor — why an SF12 message sits on air dramatically longer than an SF7 one.
+  // - Airtime roughly doubles with every step up in Spreading Factor — why an SF12 message sits on air dramatically longer than an SF7 one.
   - *ADR* (Adaptive Data Rate) — the network server tunes SF/power automatically for static, well-connected devices to save airtime and battery.
 
 ]
@@ -425,7 +421,7 @@ dependencies declared under `lib_deps`.
     Raw point-to-point LoRa — two radios talking directly, no gateway, no network server yet.
   ]
 
-  #url-block("codes/lora/")
+  #url-block("codes/esp32-iot/")
 
   #warning[
     Both radios must agree on frequency, spreading factor, bandwidth, and sync word — or they simply won't hear each other, with no error on either side.

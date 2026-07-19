@@ -32,7 +32,7 @@
 #v(10pt)
 
 #block(fill: rgb("#FFF3CD"), radius: 4pt, inset: 8pt, width: 100%)[
-  ⚡ *Key insight* — in industrial systems, the cost of a missed anomaly _(false negative)_ almost always exceeds the cost of a false alarm. Detection sensitivity must be tuned accordingly.
+  ⚡ In industrial systems, the cost of a missed anomaly _(false negative)_ almost always exceeds the cost of a false alarm. Detection sensitivity must be tuned accordingly.
 ]
 
 ---
@@ -86,7 +86,7 @@ Exploit the time-frequency structure of the signal without explicit statistical 
 #v(10pt)
 
 #block(fill: rgb("#FFF3CD"), radius: 4pt, inset: 8pt, width: 100%)[
-  ⚡ *Practical choice* — signal processing methods excel at interpretability and low latency, making them ideal as a first detection layer in real-time embedded systems before heavier ML inference.
+  ⚡ Signal processing methods excel at interpretability and low latency, making them ideal as a first detection layer in real-time embedded systems before heavier ML inference.
 ]
 
 ---

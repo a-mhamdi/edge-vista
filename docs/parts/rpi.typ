@@ -2,12 +2,6 @@
 
 = Raspberry Pi
 
-#hl[#text(weight: "bold")[Why Use Raspberry Pi]]
-
-The Raspberry Pi is a favorite among newcomers thanks to its low price, extensive documentation, and large user base. Since it ships with a familiar Debian-based environment, getting comfortable with Linux is straightforward. At the same time, it works just as well for experienced users who want to build custom hardware, host home servers, or tinker with electronics through its 40-pin GPIO header.
-
----
-
 #hl[#text(weight: "bold")[What is Raspberry Pi]]
 
 The Raspberry Pi is a *low-cost* single-board computer rather than an operating system itself. It has become a go-to platform for running Linux-based embedded systems, and it shows up constantly in IoT projects, home automation setups, classrooms, and quick prototypes. The board was created by the Raspberry Pi Foundation (today Raspberry Pi Ltd.) with computer science education as its founding mission.
@@ -17,6 +11,10 @@ Its default operating system is *Raspberry Pi OS* (known as Raspbian prior to Ma
 
 #align(center)[#image("../assets/rpi-5.png", width: 65%)] \
 #footer[#link("https://commons.wikimedia.org/wiki/File:RaspberryPi_5B.svg")[Wikipedia Commons]]
+
+#hl[#text(weight: "bold")[Why Use Raspberry Pi]]
+
+The Raspberry Pi is a favorite among newcomers thanks to its low price, extensive documentation, and large user base. Since it ships with a familiar Debian-based environment, getting comfortable with Linux is straightforward. At the same time, it works just as well for experienced users who want to build custom hardware, host home servers, or tinker with electronics through its 40-pin GPIO header.
 
 == Connectivity and Network Configuration
 #title-slide("Connectivity", "Testing and Setting Up Network")

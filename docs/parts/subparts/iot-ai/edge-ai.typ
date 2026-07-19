@@ -388,8 +388,8 @@ $
 - Microcontrollers _(e.g. ESP32)_ typically offer: hundreds of KB–few MB RAM, no GPU, limited flash.
 - Models must be small and efficient — this rules out running full-size networks as-is.
 - Techniques to fit models on-device:
-/ Quantization _(float32 → int8)_: smaller, faster, minor accuracy loss.
-/ Pruning: removing redundant weights/connections.
+  / Quantization _(float32 → int8)_: smaller, faster, minor accuracy loss.
+  / Pruning: removing redundant weights/connections.
 
 #info[Architectures designed for constrained devices _(e.g. MobileNet-style, small CNNs, simple DSP + classical ML)_.]
 
@@ -586,14 +586,13 @@ object also gets its own separate mask
 
 #topic[Data Acquisition]
 
-- Data collected via:
 - Edge Impulse mobile app _(phone sensors)_
 - Data forwarder _(serial, from a connected board)_
 - Direct upload _(CSV, WAV, images)_
 - Each sample is labeled and split into *training* / *testing* sets.
 - For sensor data _(e.g. accelerometer, microphone, potentiometer)_:
-- fixed-length windows,
-- defined sample rate.
+  - fixed-length windows,
+  - defined sample rate.
 
 ---
 
@@ -607,7 +606,7 @@ An *impulse* is the processing + learning pipeline:
 - *Input block*: raw signal window _(time series, image, audio)_
 - *DSP block*: feature extraction _(e.g. spectral features, MFCC, raw)_
 - *Learning block*: neural network / classifier trained on extracted features
-- Each block is configurable and can be previewed before training.
+Each block is configurable and can be previewed before training.
 
 ---
 
@@ -615,8 +614,7 @@ An *impulse* is the processing + learning pipeline:
 
 - Model trained directly in-browser (or via API) on the labeled dataset.
 - Confusion matrix and accuracy reported per class.
-- *EON Tuner*: automated search over DSP/model configurations for a given \
-accuracy / latency / memory budget.
+- *EON Tuner*: automated search over DSP/model configurations for a given accuracy / latency / memory budget.
 - Test on held-out data before deployment.
 
 ---
@@ -643,15 +641,14 @@ accuracy / latency / memory budget.
 
 #topic[Deployment]
 
-- Exports as:
+Exports as:
 - Arduino library (`.zip`, drop into `libraries/`)
 - C++ SDK (portable, any toolchain)
 - Pre-built firmware for supported boards
-- Deployment includes both the trained model *and* the matching DSP code — \
-ensures identical feature extraction on-device as during training.
+- Deployment includes both the trained model *and* the matching DSP code — ensures identical feature extraction on-device as during training.
 - Runs fully offline on-device after deployment — no cloud inference call needed.
 
-#url-block("codes/cv/edge-impulse/")
+// #url-block("codes/edge-impulse/")
 
 ---
 
@@ -696,7 +693,7 @@ ensures identical feature extraction on-device as during training.
 )
 
 #v(0.6em)
-#notebox[Key idea][
+#notebox[][
   The whole image is seen once by one network — no separate region-proposal step — which is exactly why *YOLO* scales down reasonably well to edge devices.
 ]
 
@@ -718,7 +715,7 @@ ensures identical feature extraction on-device as during training.
   - Camera I/O + preprocessing also compete for the same CPU budget
 
   #v(0.6em)
-  #notebox[Takeaway][
+  #notebox[][
     On a Pi, the model choice and export format matter far more than they would on a desktop GPU.
   ]
 ]
@@ -755,5 +752,5 @@ ensures identical feature extraction on-device as during training.
   ]
   */
 
-  #url-block("codes/cv/yolo-pi/")
+  #url-block("codes/pi-cam/")
 ]

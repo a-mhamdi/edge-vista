@@ -48,7 +48,7 @@
     radius: 4pt,
     inset: 10pt,
     fill: teal-light,
-  )[Scraped by Prometheus → visualized in Grafana]\
+  )[Scraped by Prometheus]\
   #text(fill: teal-color)[↓]\
   #box(
     stroke: teal-color,
@@ -80,11 +80,11 @@
 
 *2. Create the dedicated user*
 
-#url-block("codes/observability/node-exporter.service")
-
 ```bash
   sudo useradd --no-create-home --shell /bin/false node_exporter
 ```
+
+#url-block("codes/observability/node-exporter.service")
 
 *3. Activate the service*
 
