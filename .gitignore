@@ -14,7 +14,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 sdist/
 var/
@@ -194,9 +193,9 @@ cython_debug/
 .abstra/
 
 # Visual Studio Code
-#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
+#   Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore
 #   that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#   and can be added to the global gitignore or merged into this file. However, if you prefer, 
+#   and can be added to the global gitignore or merged into this file. However, if you prefer,
 #   you could uncomment the following to ignore the entire vscode folder
 # .vscode/
 # Temporary file for partial code execution
@@ -219,8 +218,9 @@ codes/mosquitto/passwd
 docs/assets/tikz/tmp.pdf
 docs/assets/tikz/tmp.tex
 docs/assets/tmp.svg
-codes/esp32-playground/include/config.hpp
-codes/esp32-playground/.idea
+codes/esp32-iot/include/config.hpp
+codes/esp32-iot/.idea
+codes/esp32-iot/.pio
 codes/esp32-cam/tools/ei_dataset/unlabeled
 codes/influxdb/data
 codes/influxdb/config
@@ -232,3 +232,9 @@ codes/nodered/data/.config.*.json
 codes/nodered/data/flows_cred.json
 codes/nodered/data/node_modules
 codes/MQTT-Explorer-0.4.0-beta.6.AppImage
+codes/pi-cam/models
+codes/pi-cam/uv.lock
+codes/esp32-cam/tools/uv.lock
+codes/esp32-cam/esp_dataset
+codes/esp32-cam/include/config.hpp
+codes/esp32-cam/.idea
