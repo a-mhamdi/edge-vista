@@ -1,1074 +1,1498 @@
 [
+{
+"id": "tab_nodered",
+"type": "tab",
+"label": "NodeRED 101",
+"disabled": false,
+"info": "Demo flow for the Edge Vista workshop – tour of the main node-red-dashboard widgets."
+},
+{
+"id": "tab_influxdb",
+"type": "tab",
+"label": "InfluxDB 101",
+"disabled": false,
+"info": "Demo flow: saving generated data to InfluxDB automatically, and saving manual UI input on demand. Requires the node-red-contrib-influxdb package."
+},
+{
+"id": "tab_mqtt",
+"type": "tab",
+"label": "MQTT 101",
+"disabled": false,
+"info": ""
+},
+{
+"id": "tab_yolo_mqtt_influx",
+"type": "tab",
+"label": "YOLO 101",
+"disabled": false,
+"info": ""
+},
+{
+"id": "uitab1",
+"type": "ui_tab",
+"name": "NodeRED 101",
+"icon": "dashboard",
+"order": 1,
+"disabled": false,
+"hidden": false
+},
+{
+"id": "group_btn",
+"type": "ui_group",
+"name": "Button + Notification",
+"tab": "uitab1",
+"order": 1,
+"disp": true,
+"width": 4,
+"collapse": false,
+"className": ""
+},
+{
+"id": "group_switch",
+"type": "ui_group",
+"name": "Greeting",
+"tab": "uitab1",
+"order": 5,
+"disp": true,
+"width": 4,
+"collapse": false,
+"className": ""
+},
+{
+"id": "group_slider",
+"type": "ui_group",
+"name": "Slider -> Gauge",
+"tab": "uitab1",
+"order": 3,
+"disp": true,
+"width": 4,
+"collapse": false,
+"className": ""
+},
+{
+"id": "group_dropdown",
+"type": "ui_group",
+"name": "Select Mode",
+"tab": "uitab1",
+"order": 4,
+"disp": true,
+"width": 4,
+"collapse": false,
+"className": ""
+},
+{
+"id": "a0a0463b8a99ce05",
+"type": "ui_base",
+"theme": {
+"name": "theme-dark",
+"lightTheme": {
+"default": "#0094CE",
+"baseColor": "#00cc47",
+"baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+"edited": true,
+"reset": false
+},
+"darkTheme": {
+"default": "#097479",
+"baseColor": "#097479",
+"baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+"edited": true,
+"reset": false
+},
+"customTheme": {
+"name": "Untitled Theme 1",
+"default": "#4B7930",
+"baseColor": "#4B7930",
+"baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+"reset": false
+},
+"themeState": {
+"base-color": {
+"default": "#097479",
+"value": "#097479",
+"edited": true
+},
+"page-titlebar-backgroundColor": {
+"value": "#097479",
+"edited": false
+},
+"page-backgroundColor": {
+"value": "#111111",
+"edited": false
+},
+"page-sidebar-backgroundColor": {
+"value": "#333333",
+"edited": false
+},
+"group-textColor": {
+"value": "#0eb8c0",
+"edited": false
+},
+"group-borderColor": {
+"value": "#555555",
+"edited": false
+},
+"group-backgroundColor": {
+"value": "#333333",
+"edited": false
+},
+"widget-textColor": {
+"value": "#eeeeee",
+"edited": false
+},
+"widget-backgroundColor": {
+"value": "#097479",
+"edited": false
+},
+"widget-borderColor": {
+"value": "#333333",
+"edited": false
+},
+"base-font": {
+"value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+}
+},
+"angularTheme": {
+"primary": "indigo",
+"accents": "blue",
+"warn": "red",
+"background": "grey",
+"palette": "light"
+}
+},
+"site": {
+"name": "Node-RED Dashboard",
+"hideToolbar": "false",
+"allowSwipe": "false",
+"lockMenu": "false",
+"allowTempTheme": "true",
+"dateFormat": "DD/MM/YYYY",
+"sizes": {
+"sx": 48,
+"sy": 48,
+"gx": 6,
+"gy": 6,
+"cx": 6,
+"cy": 6,
+"px": 0,
+"py": 0
+}
+}
+},
+{
+"id": "uitabInflux",
+"type": "ui_tab",
+"name": "InfluxDB 101",
+"icon": "storage",
+"order": 2,
+"disabled": false,
+"hidden": false
+},
+{
+"id": "grpAuto",
+"type": "ui_group",
+"name": "1. Auto-generated data",
+"tab": "uitabInflux",
+"order": 1,
+"disp": true,
+"width": 6,
+"collapse": false,
+"className": ""
+},
+{
+"id": "grpManual",
+"type": "ui_group",
+"name": "2. Manual entry",
+"tab": "uitabInflux",
+"order": 2,
+"disp": true,
+"width": 6,
+"collapse": false
+},
+{
+"id": "2077c4f77c4a2c3d",
+"type": "ui_group",
+"name": "Temperature",
+"tab": "uitab1",
+"order": 6,
+"disp": true,
+"width": 4,
+"collapse": false,
+"className": ""
+},
+{
+"id": "03102eeed7eb3381",
+"type": "ui_group",
+"name": "LED Control",
+"tab": "uitab1",
+"order": 2,
+"disp": true,
+"width": 4,
+"collapse": false,
+"className": ""
+},
+{
+"id": "10486d47f8626a46",
+"type": "ui_spacer",
+"z": "tab_nodered",
+"name": "spacer",
+"group": "group_slider",
+"order": 2,
+"width": 4,
+"height": 1
+},
+{
+"id": "mqtt_broker_config",
+"type": "mqtt-broker",
+"name": "Mosquitto",
+"broker": "192.168.1.18",
+"port": "1883",
+"clientid": "",
+"autoConnect": true,
+"usetls": false,
+"protocolVersion": "4",
+"keepalive": "60",
+"cleansession": true,
+"autoUnsubscribe": true,
+"birthTopic": "",
+"birthQos": "0",
+"birthPayload": "",
+"birthMsg": {},
+"closeTopic": "",
+"closeQos": "0",
+"closePayload": "",
+"closeMsg": {},
+"willTopic": "",
+"willQos": "0",
+"willPayload": "",
+"willMsg": {},
+"userProps": "",
+"sessionExpiry": ""
+},
+{
+"id": "influxdb_config",
+"type": "influxdb",
+"hostname": "192.168.1.18",
+"port": "8086",
+"database": "",
+"name": "Write to InfluxDB",
+"usetls": false,
+"tls": "",
+"influxdbVersion": "2.0",
+"url": "http://192.168.1.18:8086",
+"timeout": "",
+"rejectUnauthorized": false
+},
+{
+"id": "ui-tab-edge-vista",
+"type": "ui_tab",
+"name": "Edge Vista Dashboard",
+"icon": "dashboard",
+"order": 3,
+"disabled": false,
+"hidden": false
+},
+{
+"id": "group-pot",
+"type": "ui_group",
+"name": "Potentiometer",
+"tab": "ui-tab-edge-vista",
+"order": 1,
+"disp": true,
+"width": "6",
+"collapse": false
+},
+{
+"id": "group-led",
+"type": "ui_group",
+"name": "LED Control",
+"tab": "ui-tab-edge-vista",
+"order": 2,
+"disp": true,
+"width": "6",
+"collapse": false
+},
+{
+"id": "ba6e86883abfccd8",
+"type": "ui_spacer",
+"z": "tab_influxdb",
+"name": "spacer",
+"group": "grpManual",
+"order": 2,
+"width": 1,
+"height": 1
+},
+{
+"id": "cm_btn",
+"type": "comment",
+"z": "tab_nodered",
+"name": "1. ui_button -> ui_toast",
+"info": "A button emits a click event.",
+"x": 150,
+"y": 60,
+"wires": []
+},
+{
+"id": "cm_switch",
+"type": "comment",
+"z": "tab_nodered",
+"name": "2. ui_switch -> function -> ui_text",
+"info": "The switch sends a boolean. A function turns it into a human-readable status string, which feeds a text widget.",
+"x": 150,
+"y": 180,
+"wires": []
+},
+{
+"id": "fnled",
+"type": "function",
+"z": "tab_nodered",
+"name": "boolean -> status text",
+"func": "msg.payload = msg.payload ? \"LED is ON\" : \"LED is OFF\";\nreturn msg;",
+"outputs": 1,
+"timeout": 0,
+"noerr": 0,
+"initialize": "",
+"finalize": "",
+"libs": [],
+"x": 380,
+"y": 240,
+"wires": [
+[
+"txtled"
+]
+]
+},
+{
+"id": "cm_slider",
+"type": "comment",
+"z": "tab_nodered",
+"name": "3. ui_slider -> ui_gauge",
+"info": "The slider payload (0-100) drives a gauge directly, no processing needed.",
+"x": 150,
+"y": 300,
+"wires": []
+},
+{
+"id": "cm_dropdown",
+"type": "comment",
+"z": "tab_nodered",
+"name": "4. ui_dropdown -> ui_text",
+"info": "A dropdown lets users pick between discrete modes.",
+"x": 150,
+"y": 420,
+"wires": []
+},
+{
+"id": "cm_input",
+"type": "comment",
+"z": "tab_nodered",
+"name": "5. ui_text_input -> function -> ui_text",
+"info": "Free-text input, transformed by a function, then echoed back on a text widget.",
+"x": 150,
+"y": 540,
+"wires": []
+},
+{
+"id": "fngreet",
+"type": "function",
+"z": "tab_nodered",
+"name": "build greeting",
+"func": "msg.payload = \"Hello, \" + msg.payload + \"!\";\nreturn msg;",
+"outputs": 1,
+"timeout": 0,
+"noerr": 0,
+"initialize": "",
+"finalize": "",
+"libs": [],
+"x": 380,
+"y": 600,
+"wires": [
+  [
+    "txtgreet"
+  ]
+]
+},
+{
+  "id": "cm_sensor",
+  "type": "comment",
+  "z": "tab_nodered",
+  "name": "6. inject -> function -> gauge + chart",
+  "info": "A repeating inject simulates a sensor. One function generates the random value, fanning out to both a live gauge and a time-series chart.",
+  "x": 150,
+  "y": 660,
+  "wires": []
+},
+{
+  "id": "inj1",
+  "type": "inject",
+  "z": "tab_nodered",
+  "name": "Every 2s",
+  "props": [
     {
-        "id": "fb5f65f09f8ddb9f",
-        "type": "tab",
-        "label": "Flow 1",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
-        "id": "tab1",
-        "type": "tab",
-        "label": "NodeRED 101",
-        "disabled": false,
-        "info": "Demo flow for the Edge Vista workshop – tour of the main node-red-dashboard widgets."
-    },
-    {
-        "id": "tabInflux",
-        "type": "tab",
-        "label": "InfluxDB 101",
-        "disabled": false,
-        "info": "Demo flow: saving generated data to InfluxDB automatically, and saving manual UI input on demand. Requires the node-red-contrib-influxdb package."
-    },
-    {
-        "id": "uitab1",
-        "type": "ui_tab",
-        "name": "NodeRED 101",
-        "icon": "dashboard",
-        "order": 1,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "group_btn",
-        "type": "ui_group",
-        "name": "1. Button + Notification",
-        "tab": "uitab1",
-        "order": 1,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "group_switch",
-        "type": "ui_group",
-        "name": "2. Switch",
-        "tab": "uitab1",
-        "order": 2,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "group_slider",
-        "type": "ui_group",
-        "name": "3. Slider -> Gauge",
-        "tab": "uitab1",
-        "order": 3,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "group_dropdown",
-        "type": "ui_group",
-        "name": "4. Dropdown",
-        "tab": "uitab1",
-        "order": 4,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "group_input",
-        "type": "ui_group",
-        "name": "5. Text input",
-        "tab": "uitab1",
-        "order": 5,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "group_sensor",
-        "type": "ui_group",
-        "name": "6. Simulated sensor",
-        "tab": "uitab1",
-        "order": 6,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "a0a0463b8a99ce05",
-        "type": "ui_base",
-        "theme": {
-            "name": "theme-light",
-            "lightTheme": {
-                "default": "#0094CE",
-                "baseColor": "#0094CE",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
-            },
-            "darkTheme": {
-                "default": "#097479",
-                "baseColor": "#097479",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
-            },
-            "customTheme": {
-                "name": "Untitled Theme 1",
-                "default": "#4B7930",
-                "baseColor": "#4B7930",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-            },
-            "themeState": {
-                "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
-                    "edited": false
-                },
-                "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "widget-textColor": {
-                    "value": "#111111",
-                    "edited": false
-                },
-                "widget-backgroundColor": {
-                    "value": "#0094ce",
-                    "edited": false
-                },
-                "widget-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "base-font": {
-                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
-                }
-            },
-            "angularTheme": {
-                "primary": "indigo",
-                "accents": "blue",
-                "warn": "red",
-                "background": "grey",
-                "palette": "light"
-            }
-        },
-        "site": {
-            "name": "Node-RED Dashboard",
-            "hideToolbar": "false",
-            "allowSwipe": "false",
-            "lockMenu": "false",
-            "allowTempTheme": "true",
-            "dateFormat": "DD/MM/YYYY",
-            "sizes": {
-                "sx": 48,
-                "sy": 48,
-                "gx": 6,
-                "gy": 6,
-                "cx": 6,
-                "cy": 6,
-                "px": 0,
-                "py": 0
-            }
-        }
-    },
-    {
-        "id": "uitabInflux",
-        "type": "ui_tab",
-        "name": "InfluxDB 101",
-        "icon": "storage",
-        "order": 2,
-        "disabled": false,
-        "hidden": false
-    },
-    {
-        "id": "grpAuto",
-        "type": "ui_group",
-        "name": "1. Auto-generated data",
-        "tab": "uitabInflux",
-        "order": 1,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "grpManual",
-        "type": "ui_group",
-        "name": "2. Manual entry",
-        "tab": "uitabInflux",
-        "order": 2,
-        "disp": true,
-        "width": 6,
-        "collapse": false
-    },
-    {
-        "id": "6c916137bea22592",
-        "type": "influxdb",
-        "hostname": "127.0.0.1",
-        "port": 8086,
-        "protocol": "http",
-        "database": "database",
-        "name": "InfluxDB",
-        "usetls": false,
-        "tls": "",
-        "influxdbVersion": "2.0",
-        "url": "http://192.168.1.18:8086",
-        "timeout": 10,
-        "rejectUnauthorized": false
-    },
-    {
-        "id": "862afcdb8a758f88",
-        "type": "inject",
-        "z": "fb5f65f09f8ddb9f",
-        "name": "Abcd",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "abc",
-        "payload": "20",
-        "payloadType": "num",
-        "x": 110,
-        "y": 180,
-        "wires": [
-            [
-                "711daea264bb7ccc"
-            ]
-        ]
-    },
-    {
-        "id": "711daea264bb7ccc",
-        "type": "debug",
-        "z": "fb5f65f09f8ddb9f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 360,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "cm_btn",
-        "type": "comment",
-        "z": "tab1",
-        "name": "1. ui_button -> ui_toast",
-        "info": "A button emits a click event. We wire it straight into a toast notification so students see the immediate output-to-widget link.",
-        "x": 150,
-        "y": 60,
-        "wires": []
-    },
-    {
-        "id": "cm_switch",
-        "type": "comment",
-        "z": "tab1",
-        "name": "2. ui_switch -> function -> ui_text",
-        "info": "The switch sends a boolean. A function turns it into a human-readable status string, which feeds a text widget.",
-        "x": 150,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "fnled",
-        "type": "function",
-        "z": "tab1",
-        "name": "boolean -> status text",
-        "func": "msg.payload = msg.payload ? \"LED is ON\" : \"LED is OFF\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 240,
-        "wires": [
-            [
-                "txtled"
-            ]
-        ]
-    },
-    {
-        "id": "cm_slider",
-        "type": "comment",
-        "z": "tab1",
-        "name": "3. ui_slider -> ui_gauge",
-        "info": "The slider payload (0-100) drives a gauge directly, no processing needed - a good way to show a 1:1 input-to-output link.",
-        "x": 150,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "cm_dropdown",
-        "type": "comment",
-        "z": "tab1",
-        "name": "4. ui_dropdown -> ui_text",
-        "info": "A dropdown lets users pick between discrete modes; useful later to switch an ESP32 or sensor operating mode.",
-        "x": 150,
-        "y": 420,
-        "wires": []
-    },
-    {
-        "id": "cm_input",
-        "type": "comment",
-        "z": "tab1",
-        "name": "5. ui_text_input -> function -> ui_text",
-        "info": "Free-text input, transformed by a function, then echoed back on a text widget - the classic 'greeting' pattern.",
-        "x": 150,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "fngreet",
-        "type": "function",
-        "z": "tab1",
-        "name": "build greeting",
-        "func": "msg.payload = \"Hello, \" + msg.payload + \"!\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 600,
-        "wires": [
-            [
-                "txtgreet"
-            ]
-        ]
-    },
-    {
-        "id": "cm_sensor",
-        "type": "comment",
-        "z": "tab1",
-        "name": "6. inject -> function -> gauge + chart",
-        "info": "A repeating inject simulates a sensor. One function generates the random value, fanning out to both a live gauge and a time-series chart - foreshadowing the real MQTT sensor data used on Day 2/3.",
-        "x": 150,
-        "y": 660,
-        "wires": []
-    },
-    {
-        "id": "inj1",
-        "type": "inject",
-        "z": "tab1",
-        "name": "Every 2s",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "2",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 150,
-        "y": 720,
-        "wires": [
-            [
-                "fnsensor"
-            ]
-        ]
-    },
-    {
-        "id": "fnsensor",
-        "type": "function",
-        "z": "tab1",
-        "name": "simulate temperature",
-        "func": "msg.payload = +(20 + Math.random() * 10).toFixed(1);\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 720,
-        "wires": [
-            [
-                "gg2",
-                "ch1"
-            ]
-        ]
-    },
-    {
-        "id": "btn1",
-        "type": "ui_button",
-        "z": "tab1",
-        "name": "Send notification",
-        "group": "group_btn",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": false,
-        "label": "Click me",
-        "tooltip": "",
-        "color": "",
-        "bgcolor": "",
-        "className": "",
-        "icon": "",
-        "payload": "clicked",
-        "payloadType": "str",
-        "topic": "nodered101/button",
-        "topicType": "msg",
-        "x": 150,
-        "y": 120,
-        "wires": [
-            [
-                "toast1"
-            ]
-        ]
-    },
-    {
-        "id": "dd1",
-        "type": "ui_dropdown",
-        "z": "tab1",
-        "name": "Mode select",
-        "label": "Mode",
-        "tooltip": "",
-        "place": "Select a mode",
-        "group": "group_dropdown",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "multiple": false,
-        "options": [
-            {
-                "label": "Auto",
-                "value": "auto",
-                "type": "str"
-            },
-            {
-                "label": "Manual",
-                "value": "manual",
-                "type": "str"
-            },
-            {
-                "label": "Eco",
-                "value": "eco",
-                "type": "str"
-            }
-        ],
-        "payload": "",
-        "topic": "nodered101/mode",
-        "topicType": "msg",
-        "className": "",
-        "x": 150,
-        "y": 480,
-        "wires": [
-            [
-                "txtmode"
-            ]
-        ]
-    },
-    {
-        "id": "sw1",
-        "type": "ui_switch",
-        "z": "tab1",
-        "name": "LED switch",
-        "label": "LED",
-        "tooltip": "",
-        "group": "group_switch",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "decouple": "false",
-        "topic": "nodered101/led",
-        "topicType": "msg",
-        "style": "",
-        "onvalue": "true",
-        "onvalueType": "bool",
-        "onicon": "",
-        "oncolor": "",
-        "offvalue": "false",
-        "offvalueType": "bool",
-        "officon": "",
-        "offcolor": "",
-        "x": 150,
-        "y": 240,
-        "wires": [
-            [
-                "fnled"
-            ]
-        ]
-    },
-    {
-        "id": "sld1",
-        "type": "ui_slider",
-        "z": "tab1",
-        "name": "Brightness slider",
-        "label": "Brightness",
-        "tooltip": "",
-        "group": "group_slider",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "outs": "end",
-        "topic": "nodered101/brightness",
-        "topicType": "msg",
-        "min": 0,
-        "max": 100,
-        "step": 1,
-        "className": "",
-        "x": 150,
-        "y": 360,
-        "wires": [
-            [
-                "gg1"
-            ]
-        ]
-    },
-    {
-        "id": "ti1",
-        "type": "ui_text_input",
-        "z": "tab1",
-        "name": "Name input",
-        "label": "Your name",
-        "tooltip": "",
-        "group": "group_input",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "mode": "text",
-        "delay": 300,
-        "topic": "nodered101/name",
-        "topicType": "msg",
-        "x": 150,
-        "y": 600,
-        "wires": [
-            [
-                "fngreet"
-            ]
-        ]
-    },
-    {
-        "id": "txtled",
-        "type": "ui_text",
-        "z": "tab1",
-        "group": "group_switch",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "LED status",
-        "label": "Status:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "x": 600,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "txtmode",
-        "type": "ui_text",
-        "z": "tab1",
-        "group": "group_dropdown",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "Selected mode",
-        "label": "Current mode:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "x": 400,
-        "y": 480,
-        "wires": []
-    },
-    {
-        "id": "txtgreet",
-        "type": "ui_text",
-        "z": "tab1",
-        "group": "group_input",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "Greeting",
-        "label": "Message:",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "x": 600,
-        "y": 600,
-        "wires": []
-    },
-    {
-        "id": "gg1",
-        "type": "ui_gauge",
-        "z": "tab1",
-        "name": "Brightness gauge",
-        "group": "group_slider",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Brightness",
-        "label": "%",
-        "format": "{{value}}",
-        "min": 0,
-        "max": 100,
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "40",
-        "seg2": "80",
-        "diff": false,
-        "className": "",
-        "x": 400,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "gg2",
-        "type": "ui_gauge",
-        "z": "tab1",
-        "name": "Temperature gauge",
-        "group": "group_sensor",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Temperature",
-        "label": "°C",
-        "format": "{{value}}",
-        "min": 0,
-        "max": 40,
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "25",
-        "seg2": "32",
-        "diff": false,
-        "className": "",
-        "x": 630,
-        "y": 700,
-        "wires": []
-    },
-    {
-        "id": "ch1",
-        "type": "ui_chart",
-        "z": "tab1",
-        "name": "Temperature history",
-        "group": "group_sensor",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "Temperature history",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "0",
-        "ymax": "40",
-        "removeOlder": "5",
-        "removeOlderPoints": "",
-        "removeOlderUnit": "60",
-        "cutout": 0,
-        "colors": [
-            "#1f77b4"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 630,
-        "y": 740,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "toast1",
-        "type": "ui_toast",
-        "z": "tab1",
-        "position": "top right",
-        "displayTime": "3",
-        "highlight": "",
-        "sendall": true,
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "raw": false,
-        "topic": "Button demo",
-        "name": "Toast notification",
-        "x": 400,
-        "y": 120,
-        "wires": []
-    },
-    {
-        "id": "cmSetup",
-        "type": "comment",
-        "z": "tabInflux",
-        "name": "Setup (read me first)",
-        "info": "1) npm install node-red-contrib-influxdb\n2) Double-click any 'influxdb out' node, edit the server config: set url, org, bucket, and paste your API token (token is a credential field, not stored in this JSON - you must re-enter it after import).\n3) For InfluxDB 1.x instead of 2.x: change 'influxdbVersion' to '1.x' in the config node and use 'database' instead of org/bucket.",
-        "x": 160,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "cmAuto",
-        "type": "comment",
-        "z": "tabInflux",
-        "name": "1. Generated data -> gate -> InfluxDB",
-        "info": "An inject node simulates a sensor every 5s. The value is always shown on the dashboard, but only written to InfluxDB when the 'Auto-save' switch is ON - this separates 'displaying data' from 'persisting data', an important distinction to teach.",
-        "x": 170,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "injGen",
-        "type": "inject",
-        "z": "tabInflux",
-        "name": "Every 5s",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "5",
-        "crontab": "",
-        "once": true,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
-        "y": 160,
-        "wires": [
-            [
-                "fnGen"
-            ]
-        ]
-    },
-    {
-        "id": "fnGen",
-        "type": "function",
-        "z": "tabInflux",
-        "name": "simulate sensor reading",
-        "func": "msg.payload = {\n    temperature: +(20 + Math.random() * 10).toFixed(1),\n    humidity: +(40 + Math.random() * 20).toFixed(1)\n};\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 160,
-        "wires": [
-            [
-                "ggTemp",
-                "chTemp",
-                "fnGate"
-            ]
-        ]
-    },
-    {
-        "id": "ggTemp",
-        "type": "ui_gauge",
-        "z": "tabInflux",
-        "name": "Live temperature",
-        "group": "grpAuto",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "gtype": "gage",
-        "title": "Temperature",
-        "label": "°C",
-        "format": "{{msg.payload.temperature}}",
-        "min": 0,
-        "max": 40,
-        "colors": [
-            "#00b500",
-            "#e6e600",
-            "#ca3838"
-        ],
-        "seg1": "25",
-        "seg2": "32",
-        "diff": false,
-        "className": "",
-        "x": 570,
-        "y": 80,
-        "wires": []
-    },
-    {
-        "id": "chTemp",
-        "type": "ui_chart",
-        "z": "tabInflux",
-        "name": "Temperature history",
-        "group": "grpAuto",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "label": "Temperature history",
-        "chartType": "line",
-        "legend": "false",
-        "xformat": "HH:mm:ss",
-        "interpolate": "linear",
-        "nodata": "",
-        "dot": false,
-        "ymin": "0",
-        "ymax": "40",
-        "removeOlder": "5",
-        "removeOlderPoints": "",
-        "removeOlderUnit": "60",
-        "cutout": 0,
-        "colors": [
-            "#1f77b4"
-        ],
-        "outputs": 1,
-        "useDifferentColor": false,
-        "className": "",
-        "x": 580,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "swAutoSave",
-        "type": "ui_switch",
-        "z": "tabInflux",
-        "name": "Auto-save switch",
-        "label": "Auto-save to InfluxDB",
-        "tooltip": "When ON, every generated reading is written to InfluxDB.",
-        "group": "grpAuto",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "passthru": true,
-        "decouple": "false",
-        "topic": "nodered101/autosave",
-        "topicType": "msg",
-        "style": "",
-        "onvalue": "true",
-        "onvalueType": "bool",
-        "onicon": "",
-        "oncolor": "",
-        "offvalue": "false",
-        "offvalueType": "bool",
-        "officon": "",
-        "offcolor": "",
-        "x": 150,
-        "y": 320,
-        "wires": [
-            [
-                "chgAutoSave"
-            ]
-        ]
-    },
-    {
-        "id": "chgAutoSave",
-        "type": "change",
-        "z": "tabInflux",
-        "name": "store flag in flow context",
-        "rules": [
-            {
-                "t": "set",
-                "p": "autoSaveEnabled",
-                "pt": "flow",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 470,
-        "y": 320,
-        "wires": [
-            [
-                "ce1a581868018b0c"
-            ]
-        ]
-    },
-    {
-        "id": "fnGate",
-        "type": "function",
-        "z": "tabInflux",
-        "name": "gate: only pass if auto-save ON",
-        "func": "if (flow.get('autoSaveEnabled')) {\n    return msg;\n}\nreturn null;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
-        "y": 240,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "cmManual",
-        "type": "comment",
-        "z": "tabInflux",
-        "name": "2. Manual UI entry -> InfluxDB",
-        "info": "A form lets a user type a value and hit Save. On submit, a function builds a proper point (measurement + tags + fields) which is written straight to InfluxDB, then a toast confirms the write.",
-        "x": 160,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "formManual",
-        "type": "ui_form",
-        "z": "tabInflux",
-        "name": "Manual reading form",
-        "label": "Manual reading",
-        "group": "grpManual",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "options": [
-            {
-                "label": "Temperature (°C)",
-                "value": "temperature",
-                "type": "number",
-                "required": true,
-                "rows": null
-            },
-            {
-                "label": "Humidity (%)",
-                "value": "humidity",
-                "type": "number",
-                "required": true,
-                "rows": null
-            }
-        ],
-        "formValue": {
-            "temperature": "",
-            "humidity": ""
-        },
-        "payload": "",
-        "submit": "Save to InfluxDB",
-        "cancel": "Clear",
-        "topic": "nodered101/manual",
-        "topicType": "msg",
-        "splitLayout": "",
-        "className": "",
-        "x": 160,
-        "y": 440,
-        "wires": [
-            [
-                "fnManual"
-            ]
-        ]
-    },
-    {
-        "id": "fnManual",
-        "type": "function",
-        "z": "tabInflux",
-        "name": "build point (measurement + tags)",
-        "func": "msg.measurement = \"sensor_data_manual\";\nmsg.payload = {\n    temperature: Number(msg.payload.temperature),\n    humidity: Number(msg.payload.humidity)\n};\n// Optional tag to distinguish manual entries from generated ones\nmsg.tags = { source: \"manual-ui\" };\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 440,
-        "wires": [
-            [
-                "influxManual",
-                "toastManual"
-            ]
-        ]
-    },
-    {
-        "id": "influxManual",
-        "type": "influxdb out",
-        "z": "tabInflux",
-        "influxdb": "6c916137bea22592",
-        "name": "write: sensor_data_manual",
-        "measurement": "sensor_data_manual",
-        "precision": "",
-        "retentionPolicy": "",
-        "database": "",
-        "precisionV18FluxV20": "ms",
-        "retentionPolicyV18Flux": "",
-        "org": "my-org",
-        "bucket": "my-bucket",
-        "x": 700,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "toastManual",
-        "type": "ui_toast",
-        "z": "tabInflux",
-        "position": "top right",
-        "displayTime": "3",
-        "highlight": "",
-        "sendall": true,
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "raw": false,
-        "topic": "InfluxDB",
-        "name": "Save confirmation",
-        "x": 670,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "ce1a581868018b0c",
-        "type": "influxdb out",
-        "z": "tabInflux",
-        "influxdb": "6c916137bea22592",
-        "name": "sensor_measurements",
-        "measurement": "sensor_data",
-        "precision": "",
-        "retentionPolicy": "",
-        "database": "database",
-        "precisionV18FluxV20": "ms",
-        "retentionPolicyV18Flux": "",
-        "org": "my-org",
-        "bucket": "my-bucket",
-        "x": 720,
-        "y": 320,
-        "wires": []
+      "p": "payload"
     }
+  ],
+  "repeat": "2",
+  "crontab": "",
+  "once": true,
+  "onceDelay": 0.1,
+  "topic": "",
+  "payload": "",
+  "payloadType": "date",
+  "x": 150,
+  "y": 720,
+  "wires": [
+    [
+      "fnsensor"
+    ]
+  ]
+},
+{
+  "id": "fnsensor",
+  "type": "function",
+  "z": "tab_nodered",
+  "name": "simulate temperature",
+  "func": "msg.payload = +(20 + Math.random() * 10).toFixed(1);\nreturn msg;",
+  "outputs": 1,
+  "timeout": 0,
+  "noerr": 0,
+  "initialize": "",
+  "finalize": "",
+  "libs": [],
+  "x": 380,
+  "y": 720,
+  "wires": [
+    [
+      "gg2",
+      "ch1"
+    ]
+  ]
+},
+{
+  "id": "btn1",
+  "type": "ui_button",
+  "z": "tab_nodered",
+  "name": "Send notification",
+  "group": "group_btn",
+  "order": 1,
+  "width": 0,
+  "height": 0,
+  "passthru": false,
+  "label": "Click me",
+  "tooltip": "",
+  "color": "",
+  "bgcolor": "",
+  "className": "",
+  "icon": "",
+  "payload": "clicked",
+  "payloadType": "str",
+  "topic": "nodered101/button",
+  "topicType": "msg",
+  "x": 150,
+  "y": 120,
+  "wires": [
+    [
+      "toast1"
+    ]
+  ]
+},
+{
+  "id": "dd1",
+  "type": "ui_dropdown",
+  "z": "tab_nodered",
+  "name": "Mode select",
+  "label": "Mode",
+  "tooltip": "",
+  "place": "Select a mode",
+  "group": "group_dropdown",
+  "order": 1,
+  "width": 0,
+  "height": 0,
+  "passthru": true,
+  "multiple": false,
+  "options": [
+    {
+      "label": "Auto",
+      "value": "auto",
+      "type": "str"
+    },
+    {
+      "label": "Manual",
+      "value": "manual",
+      "type": "str"
+    },
+    {
+      "label": "Eco",
+      "value": "eco",
+      "type": "str"
+    }
+  ],
+  "payload": "",
+  "topic": "nodered101/mode",
+  "topicType": "msg",
+  "className": "",
+  "x": 150,
+  "y": 480,
+  "wires": [
+    [
+      "txtmode"
+    ]
+  ]
+},
+{
+  "id": "sw1",
+  "type": "ui_switch",
+  "z": "tab_nodered",
+  "name": "LED switch",
+  "label": "LED",
+  "tooltip": "",
+  "group": "03102eeed7eb3381",
+  "order": 1,
+  "width": 0,
+  "height": 0,
+  "passthru": true,
+  "decouple": "false",
+  "topic": "nodered101/led",
+  "topicType": "msg",
+  "style": "",
+  "onvalue": "true",
+  "onvalueType": "bool",
+  "onicon": "",
+  "oncolor": "",
+  "offvalue": "false",
+  "offvalueType": "bool",
+  "officon": "",
+  "offcolor": "",
+  "animate": true,
+  "className": "",
+  "x": 150,
+  "y": 240,
+  "wires": [
+    [
+      "fnled"
+    ]
+  ]
+},
+{
+  "id": "sld1",
+  "type": "ui_slider",
+  "z": "tab_nodered",
+  "name": "Brightness slider",
+  "label": "Brightness",
+  "tooltip": "",
+  "group": "group_slider",
+  "order": 1,
+  "width": 0,
+  "height": 0,
+  "passthru": true,
+  "outs": "end",
+  "topic": "nodered101/brightness",
+  "topicType": "msg",
+  "min": 0,
+  "max": 100,
+  "step": 1,
+  "className": "",
+  "x": 150,
+  "y": 360,
+  "wires": [
+    [
+      "gg1"
+    ]
+  ]
+},
+{
+  "id": "ti1",
+  "type": "ui_text_input",
+  "z": "tab_nodered",
+  "name": "Name input",
+  "label": "Your name",
+  "tooltip": "",
+  "group": "group_switch",
+  "order": 1,
+  "width": 0,
+  "height": 0,
+  "passthru": true,
+  "mode": "text",
+  "delay": 300,
+  "topic": "nodered101/name",
+  "sendOnBlur": true,
+  "className": "",
+  "topicType": "msg",
+  "x": 150,
+  "y": 600,
+  "wires": [
+    [
+      "fngreet"
+    ]
+  ]
+},
+{
+  "id": "txtled",
+  "type": "ui_text",
+  "z": "tab_nodered",
+  "group": "03102eeed7eb3381",
+  "order": 2,
+  "width": 0,
+  "height": 0,
+  "name": "LED status",
+  "label": "Status:",
+  "format": "{{msg.payload}}",
+  "layout": "row-spread",
+  "className": "",
+  "style": false,
+  "font": "",
+  "fontSize": "",
+  "color": "#000000",
+  "x": 600,
+  "y": 240,
+  "wires": []
+},
+{
+  "id": "txtmode",
+  "type": "ui_text",
+  "z": "tab_nodered",
+  "group": "group_dropdown",
+  "order": 2,
+  "width": 0,
+  "height": 0,
+  "name": "Selected mode",
+  "label": "Current mode:",
+  "format": "{{msg.payload}}",
+  "layout": "row-spread",
+  "className": "",
+  "x": 400,
+  "y": 480,
+  "wires": []
+},
+{
+  "id": "txtgreet",
+  "type": "ui_text",
+  "z": "tab_nodered",
+  "group": "group_switch",
+  "order": 2,
+  "width": 0,
+  "height": 0,
+  "name": "Greeting",
+  "label": "Message:",
+  "format": "{{msg.payload}}",
+  "layout": "row-spread",
+  "className": "",
+  "x": 600,
+  "y": 600,
+  "wires": []
+},
+{
+  "id": "gg1",
+  "type": "ui_gauge",
+  "z": "tab_nodered",
+  "name": "Brightness gauge",
+  "group": "group_slider",
+  "order": 3,
+  "width": 0,
+  "height": 0,
+  "gtype": "gage",
+  "title": "Brightness",
+  "label": "%",
+  "format": "{{value}}",
+  "min": 0,
+  "max": 100,
+  "colors": [
+    "#00b500",
+    "#e6e600",
+    "#ca3838"
+  ],
+  "seg1": "40",
+  "seg2": "80",
+  "diff": false,
+  "className": "",
+  "x": 400,
+  "y": 360,
+  "wires": []
+},
+{
+  "id": "gg2",
+  "type": "ui_gauge",
+  "z": "tab_nodered",
+  "name": "Temperature gauge",
+  "group": "2077c4f77c4a2c3d",
+  "order": 1,
+  "width": 0,
+  "height": 0,
+  "gtype": "gage",
+  "title": "Temperature",
+  "label": "°C",
+  "format": "{{value}}",
+  "min": 0,
+  "max": 40,
+  "colors": [
+    "#00b500",
+    "#e6e600",
+    "#ca3838"
+  ],
+  "seg1": "25",
+  "seg2": "32",
+  "diff": false,
+  "className": "",
+  "x": 610,
+  "y": 680,
+  "wires": []
+},
+{
+  "id": "ch1",
+  "type": "ui_chart",
+  "z": "tab_nodered",
+  "name": "Temperature history",
+  "group": "2077c4f77c4a2c3d",
+  "order": 3,
+  "width": 0,
+  "height": 0,
+  "label": "Temperature history",
+  "chartType": "line",
+  "legend": "false",
+  "xformat": "HH:mm:ss",
+  "interpolate": "linear",
+  "nodata": "",
+  "dot": false,
+  "ymin": "0",
+  "ymax": "40",
+  "removeOlder": "5",
+  "removeOlderPoints": "",
+  "removeOlderUnit": "60",
+  "cutout": 0,
+  "useOneColor": false,
+  "useUTC": false,
+  "colors": [
+    "#1f77b4",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000",
+    "#000000"
+  ],
+  "outputs": 1,
+  "useDifferentColor": false,
+  "className": "",
+  "x": 620,
+  "y": 760,
+  "wires": [
+    []
+  ]
+},
+{
+  "id": "toast1",
+  "type": "ui_toast",
+  "z": "tab_nodered",
+  "position": "top right",
+  "displayTime": "3",
+  "highlight": "",
+  "sendall": true,
+  "outputs": 0,
+  "ok": "OK",
+  "cancel": "",
+  "raw": false,
+  "topic": "Button demo",
+  "name": "Toast notification",
+  "x": 400,
+  "y": 120,
+  "wires": []
+},
+{
+  "id": "cmSetup",
+  "type": "comment",
+  "z": "tab_influxdb",
+  "name": "Read me first",
+  "info": "1) npm install node-red-contrib-influxdb\n2) Double-click any 'influxdb out' node, edit the server config: set url, org, bucket, and paste your API token.\n3) For InfluxDB 1.x instead of 2.x: change 'influxdbVersion' to '1.x' in the config node and use 'database' instead of org/bucket.",
+  "x": 110,
+  "y": 40,
+  "wires": []
+},
+{
+  "id": "cmAuto",
+  "type": "comment",
+  "z": "tab_influxdb",
+  "name": "1. Generated data -> gate -> InfluxDB",
+  "info": "An inject node simulates a sensor every 5s. The value is always shown on the dashboard, but only written to InfluxDB when the 'Auto-save' switch is ON. This separates 'displaying data' from 'persisting data'.",
+  "x": 170,
+  "y": 100,
+  "wires": []
+},
+{
+  "id": "injGen",
+  "type": "inject",
+  "z": "tab_influxdb",
+  "name": "Every 1s",
+  "props": [
+    {
+      "p": "payload"
+    }
+  ],
+  "repeat": "1",
+  "crontab": "",
+  "once": true,
+  "onceDelay": 0.1,
+  "topic": "",
+  "payload": "",
+  "payloadType": "date",
+  "x": 120,
+  "y": 160,
+  "wires": [
+    [
+      "fnGen"
+    ]
+  ]
+},
+{
+  "id": "fnGen",
+  "type": "function",
+  "z": "tab_influxdb",
+  "name": "simulate sensor reading",
+  "func": "msg.payload = {\n    temperature: +(20 + Math.random() * 10).toFixed(1),\n    humidity: +(40 + Math.random() * 20).toFixed(1)\n};\nreturn msg;",
+  "outputs": 1,
+  "timeout": 0,
+  "noerr": 0,
+  "initialize": "",
+  "finalize": "",
+  "libs": [],
+  "x": 310,
+  "y": 160,
+  "wires": [
+    [
+      "ggTemp",
+      "fnGate",
+      "11fe196bce3b472e"
+    ]
+  ]
+},
+{
+  "id": "ggTemp",
+  "type": "ui_gauge",
+  "z": "tab_influxdb",
+  "name": "Live temperature",
+  "group": "grpAuto",
+  "order": 1,
+  "width": 6,
+  "height": 4,
+  "gtype": "gage",
+  "title": "Temperature",
+  "label": "°C",
+  "format": "{{msg.payload.temperature}}",
+  "min": 0,
+  "max": 40,
+  "colors": [
+    "#00b500",
+    "#e6e600",
+    "#ca3838"
+  ],
+  "seg1": "25",
+  "seg2": "32",
+  "diff": false,
+  "className": "",
+  "x": 570,
+  "y": 60,
+  "wires": []
+},
+{
+  "id": "swAutoSave",
+  "type": "ui_switch",
+  "z": "tab_influxdb",
+  "name": "Auto-save switch",
+  "label": "Auto-save to InfluxDB",
+  "tooltip": "When ON, every generated reading is written to InfluxDB.",
+  "group": "grpAuto",
+  "order": 2,
+  "width": 6,
+  "height": 1,
+  "passthru": true,
+  "decouple": "false",
+  "topic": "nodered101/autosave",
+  "topicType": "msg",
+  "style": "",
+  "onvalue": "true",
+  "onvalueType": "bool",
+  "onicon": "",
+  "oncolor": "",
+  "offvalue": "false",
+  "offvalueType": "bool",
+  "officon": "",
+  "offcolor": "",
+  "x": 150,
+  "y": 320,
+  "wires": [
+    [
+      "chgAutoSave"
+    ]
+  ]
+},
+{
+  "id": "chgAutoSave",
+  "type": "change",
+  "z": "tab_influxdb",
+  "name": "store flag in flow context",
+  "rules": [
+    {
+      "t": "set",
+      "p": "autoSaveEnabled",
+      "pt": "flow",
+      "to": "payload",
+      "tot": "msg"
+    }
+  ],
+  "action": "",
+  "property": "",
+  "from": "",
+  "to": "",
+  "reg": false,
+  "x": 390,
+  "y": 320,
+  "wires": [
+    []
+  ]
+},
+{
+  "id": "fnGate",
+  "type": "function",
+  "z": "tab_influxdb",
+  "name": "gate: only pass if auto-save ON",
+  "func": "if (flow.get('autoSaveEnabled')) {\n    return msg;\n}\nreturn null;",
+  "outputs": 1,
+  "timeout": 0,
+  "noerr": 0,
+  "initialize": "",
+  "finalize": "",
+  "libs": [],
+  "x": 610,
+  "y": 240,
+  "wires": [
+    [
+      "ce1a581868018b0c"
+    ]
+  ]
+},
+{
+  "id": "cmManual",
+  "type": "comment",
+  "z": "tab_influxdb",
+  "name": "2. Manual UI entry -> InfluxDB",
+  "info": "A form lets a user type a value and hit Save. On submit, a function builds a proper point (measurement + tags + fields) which is written straight to InfluxDB, then a toast confirms the write.",
+  "x": 160,
+  "y": 380,
+  "wires": []
+},
+{
+  "id": "formManual",
+  "type": "ui_form",
+  "z": "tab_influxdb",
+  "name": "Manual reading form",
+  "label": "Manual reading",
+  "group": "grpManual",
+  "order": 1,
+  "width": "0",
+  "height": "0",
+  "options": [
+    {
+      "label": "Temperature (°C)",
+      "value": "temperature",
+      "type": "number",
+      "required": true,
+      "rows": null
+    },
+    {
+      "label": "Humidity (%)",
+      "value": "humidity",
+      "type": "number",
+      "required": true,
+      "rows": null
+    }
+  ],
+  "formValue": {
+    "temperature": "",
+    "humidity": ""
+  },
+  "payload": "",
+  "submit": "Save to InfluxDB",
+  "cancel": "Clear",
+  "topic": "nodered101/manual",
+  "topicType": "msg",
+  "splitLayout": "",
+  "className": "",
+  "x": 160,
+  "y": 440,
+  "wires": [
+    [
+      "fnManual"
+    ]
+  ]
+},
+{
+  "id": "fnManual",
+  "type": "function",
+  "z": "tab_influxdb",
+  "name": "build point (measurement + tags)",
+  "func": "msg.measurement = \"sensor_data_manual\";\nmsg.payload = {\n    temperature: Number(msg.payload.temperature),\n    humidity: Number(msg.payload.humidity)\n};\n// Optional tag to distinguish manual entries from generated ones\nmsg.tags = { source: \"manual-ui\" };\nreturn msg;",
+  "outputs": 1,
+  "timeout": 0,
+  "noerr": 0,
+  "initialize": "",
+  "finalize": "",
+  "libs": [],
+  "x": 460,
+  "y": 440,
+  "wires": [
+    [
+      "influxManual",
+      "toastManual"
+    ]
+  ]
+},
+{
+  "id": "influxManual",
+  "type": "influxdb out",
+  "z": "tab_influxdb",
+  "influxdb": "influxdb_config",
+  "name": "write: sensor_data_manual",
+  "measurement": "sensor_data_manual",
+  "precision": "",
+  "retentionPolicy": "",
+  "database": "",
+  "retentionPolicyV18Flux": "",
+  "org": "my-org",
+  "bucket": "my-bucket",
+  "x": 760,
+  "y": 400,
+  "wires": []
+},
+{
+"id": "toastManual",
+"type": "ui_toast",
+"z": "tab_influxdb",
+"position": "top right",
+"displayTime": "3",
+"highlight": "",
+"sendall": true,
+"outputs": 0,
+"ok": "OK",
+"cancel": "",
+"raw": true,
+"className": "",
+"topic": "InfluxDB",
+"name": "Save confirmation",
+"x": 730,
+"y": 480,
+"wires": []
+},
+{
+"id": "ce1a581868018b0c",
+"type": "influxdb out",
+"z": "tab_influxdb",
+"influxdb": "influxdb_config",
+"name": "write: sensor_data",
+"measurement": "sensor_data",
+"precision": "",
+"retentionPolicy": "",
+"database": "",
+"precisionV18FluxV20": "ms",
+"retentionPolicyV18Flux": "",
+"org": "my-org",
+"bucket": "my-bucket",
+"x": 910,
+"y": 240,
+"wires": []
+},
+{
+"id": "b0f3c8b304ed2ef3",
+"type": "ui_chart",
+"z": "tab_influxdb",
+"name": "Temperature history",
+"group": "grpAuto",
+"order": 1,
+"width": "0",
+"height": "0",
+"label": "Temperature history",
+"chartType": "line",
+"legend": "false",
+"xformat": "auto",
+"interpolate": "linear",
+"nodata": "",
+"dot": true,
+"ymin": "10",
+"ymax": "40",
+"removeOlder": "10",
+"removeOlderPoints": "1000",
+"removeOlderUnit": "1",
+"cutout": 0,
+"useOneColor": false,
+"useUTC": false,
+"colors": [
+"#1f77b4",
+"#aec7e8",
+"#ff7f0e",
+"#2ca02c",
+"#98df8a",
+"#d62728",
+"#ff9896",
+"#9467bd",
+"#c5b0d5"
+],
+"outputs": 1,
+"useDifferentColor": false,
+"className": "",
+"x": 860,
+"y": 160,
+"wires": [
+[]
+]
+},
+{
+"id": "11fe196bce3b472e",
+"type": "function",
+"z": "tab_influxdb",
+"name": "Select temperature",
+"func": "const temp = { payload: msg.payload.temperature };\n\nreturn temp;",
+"outputs": 1,
+"timeout": 0,
+"noerr": 0,
+"initialize": "",
+"finalize": "",
+"libs": [],
+"x": 570,
+"y": 160,
+"wires": [
+[
+"b0f3c8b304ed2ef3"
+]
+]
+},
+{
+"id": "mqtt-in-pot",
+"type": "mqtt in",
+"z": "tab_mqtt",
+"name": "Read From Potentiometer Topic",
+"topic": "edge-vista/pot",
+"qos": "0",
+"datatype": "json",
+"broker": "mqtt_broker_config",
+"nl": false,
+"rap": true,
+"rh": 0,
+"inputs": 0,
+"x": 170,
+"y": 100,
+"wires": [
+[
+"extract-pot-value"
+]
+]
+},
+{
+"id": "extract-pot-value",
+"type": "function",
+"z": "tab_mqtt",
+"name": "extract pot value",
+"func": "msg.payload = msg.payload.pot;\nreturn msg;",
+"outputs": 1,
+"timeout": 0,
+"noerr": 0,
+"initialize": "",
+"finalize": "",
+"libs": [],
+"x": 420,
+"y": 100,
+"wires": [
+[
+"gauge-pot",
+"chart-pot",
+"b95247e8efc0bbfa"
+]
+]
+},
+{
+"id": "gauge-pot",
+"type": "ui_gauge",
+"z": "tab_mqtt",
+"name": "Potentiometer Gauge",
+"group": "group-pot",
+"order": 1,
+"width": 0,
+"height": 0,
+"gtype": "gage",
+"title": "Potentiometer",
+"label": "raw",
+"format": "{{value}}",
+"min": 0,
+"max": "4095",
+"colors": [
+"#00b500",
+"#e6e600",
+"#ca3838"
+],
+"seg1": "",
+"seg2": "",
+"diff": false,
+"className": "",
+"x": 660,
+"y": 100,
+"wires": []
+},
+{
+"id": "chart-pot",
+"type": "ui_chart",
+"z": "tab_mqtt",
+"name": "Potentiometer Trend",
+"group": "group-pot",
+"order": 2,
+"width": 0,
+"height": 0,
+"label": "Trend",
+"chartType": "line",
+"legend": "false",
+"xformat": "HH:mm:ss",
+"interpolate": "linear",
+"nodata": "",
+"dot": false,
+"ymin": "0",
+"ymax": "4095",
+"removeOlder": 1,
+"removeOlderPoints": "",
+"removeOlderUnit": "60",
+"cutout": 0,
+"useOneColor": false,
+"useUTC": false,
+"colors": [
+"#1f77b4",
+"#aec7e8",
+"#ff7f0e",
+"#2ca02c",
+"#98df8a"
+],
+"outputs": 1,
+"x": 660,
+"y": 160,
+"wires": [
+[]
+]
+},
+{
+"id": "button-led-on",
+"type": "ui_button",
+"z": "tab_mqtt",
+"name": "LED ON",
+"group": "group-led",
+"order": 1,
+"width": 0,
+"height": 0,
+"passthru": false,
+"label": "LED ON",
+"tooltip": "",
+"color": "",
+"bgcolor": "#0f766e",
+"className": "",
+"icon": "",
+"payload": "on",
+"payloadType": "str",
+"topic": "topic",
+"topicType": "str",
+"x": 160,
+"y": 220,
+"wires": [
+[
+"build-led-payload"
+]
+]
+},
+{
+"id": "button-led-off",
+"type": "ui_button",
+"z": "tab_mqtt",
+"name": "LED OFF",
+"group": "group-led",
+"order": 2,
+"width": 0,
+"height": 0,
+"passthru": false,
+"label": "LED OFF",
+"tooltip": "",
+"color": "",
+"bgcolor": "#7a1f1f",
+"className": "",
+"icon": "",
+"payload": "off",
+"payloadType": "str",
+"topic": "topic",
+"topicType": "str",
+"x": 160,
+"y": 300,
+"wires": [
+[
+"build-led-payload"
+]
+]
+},
+{
+"id": "build-led-payload",
+"type": "function",
+"z": "tab_mqtt",
+"name": "build JSON payload",
+"func": "msg.payload = JSON.stringify({ state: msg.payload });\nreturn msg;",
+"outputs": 1,
+"timeout": 0,
+"noerr": 0,
+"initialize": "",
+"finalize": "",
+"libs": [],
+"x": 400,
+"y": 260,
+"wires": [
+[
+"mqtt-out-led"
+]
+]
+},
+{
+"id": "mqtt-out-led",
+"type": "mqtt out",
+"z": "tab_mqtt",
+"name": "Publish To LED Topic",
+"topic": "edge-vista/led/set",
+"qos": "0",
+"retain": "false",
+"respTopic": "",
+"contentType": "",
+"userProps": "",
+"correl": "",
+"expiry": "",
+"broker": "mqtt_broker_config",
+"x": 660,
+"y": 260,
+"wires": []
+},
+{
+"id": "b95247e8efc0bbfa",
+"type": "influxdb out",
+"z": "tab_mqtt",
+"influxdb": "influxdb_config",
+"name": "Potentiometer Readings",
+"measurement": "pot_data",
+"precision": "",
+"retentionPolicy": "",
+"database": "database",
+"precisionV18FluxV20": "s",
+"retentionPolicyV18Flux": "",
+"org": "my-org",
+"bucket": "my-bucket",
+"x": 670,
+"y": 40,
+"wires": []
+},
+{
+"id": "mqtt_in_detections",
+"type": "mqtt in",
+"z": "tab_yolo_mqtt_influx",
+"name": "YOLO detections",
+"topic": "edge-vista/yolo/detections",
+"qos": "0",
+"datatype": "auto-detect",
+"broker": "mqtt_broker_config",
+"nl": false,
+"rap": true,
+"inputs": 0,
+"x": 220,
+"y": 240,
+"wires": [
+[
+"json_parse_detections",
+"function_reshape_influx",
+"7fa2fc5bca55820c"
+]
+]
+},
+{
+"id": "json_parse_detections",
+"type": "json",
+"z": "tab_yolo_mqtt_influx",
+"name": "parse JSON",
+"property": "payload",
+"action": "",
+"pretty": false,
+"x": 470,
+"y": 240,
+"wires": [
+[
+"debug_payload"
+]
+]
+},
+{
+"id": "debug_payload",
+"type": "debug",
+"z": "tab_yolo_mqtt_influx",
+"name": "parsed payload",
+"active": true,
+"tosidebar": true,
+"console": false,
+"tostatus": false,
+"complete": "payload",
+"targetType": "msg",
+"statusVal": "",
+"statusType": "auto",
+"x": 720,
+"y": 240,
+"wires": []
+},
+{
+"id": "function_reshape_influx",
+"type": "function",
+"z": "tab_yolo_mqtt_influx",
+"name": "reshape for InfluxDB",
+"func": "const data = msg.payload;\nconst points = [];\n\nfor (const det of data.detections) {\n    points.push({\n        measurement: \"detections\",\n        tags: {\n            device: \"pi\",\n            class: det.class_name\n        },\n        fields: {\n            confidence: det.confidence,\n            x1: det.bbox[0],\n            y1: det.bbox[1],\n            x2: det.bbox[2],\n            y2: det.bbox[3],\n            class_id: det.class_id\n        },\n        timestamp: new Date(data.timestamp * 1000)  // convert unix seconds -> Date\n    });\n}\n\nmsg.payload = points;\nreturn msg;",
+"outputs": 1,
+"timeout": 0,
+"noerr": 0,
+"initialize": "",
+"finalize": "",
+"libs": [],
+"x": 500,
+"y": 320,
+"wires": [
+[
+"influxdb_out_detections"
+]
+]
+},
+{
+"id": "influxdb_out_detections",
+"type": "influxdb out",
+"z": "tab_yolo_mqtt_influx",
+"influxdb": "influxdb_config",
+"name": "write to InfluxDB",
+"measurement": "yolo_detections",
+"precision": "",
+"retentionPolicy": "",
+"database": "",
+"retentionPolicyV18Flux": "",
+"org": "my-org",
+"bucket": "my-bucket",
+"x": 720,
+"y": 320,
+"wires": []
+},
+{
+"id": "7fa2fc5bca55820c",
+"type": "debug",
+"z": "tab_yolo_mqtt_influx",
+"name": "detections",
+"active": true,
+"tosidebar": true,
+"console": false,
+"tostatus": false,
+"complete": "payload",
+"targetType": "msg",
+"statusVal": "",
+"statusType": "auto",
+"x": 470,
+"y": 160,
+"wires": []
+}
 ]
